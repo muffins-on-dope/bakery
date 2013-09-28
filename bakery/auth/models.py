@@ -12,6 +12,7 @@ class BakeryUser(AbstractBaseUser):
     email = models.EmailField(_('Email'), max_length=254, unique=True,
         blank=True, null=True)
     name = models.CharField(_('Name'), max_length=100, blank=True, null=True)
+    is_superuser = models.BooleanField(_('Superuser'), default=False)
     is_staff = models.BooleanField(_('Staff'), default=False)
     is_active = models.BooleanField(_('Active'), default=True)
     is_organization = models.BooleanField(_('Organization'))

@@ -1,3 +1,31 @@
+/*
+ * Bakery Stylesheet
+ * ~~~~~~~~~~~~~~~~~
+ *
+ * * Simple Grid (20px padding)
+ * * Color Schema
+ *
+ *
+ * Dull colors
+ * -----------
+ *
+ * #996633 (Dark Brown)
+ * #cc9955 (Lighter Brown)
+ * #cc8844 (Light Brown)
+ * #ffffff (White)
+ * #ddcc99 (Grey-ish)
+ *
+ * Vibrant colors
+ * --------------
+ *
+ * #cc6600 (Vibrant Brown)
+ * #ff9911 (Light Orange)
+ * #ff8800 (Dark Orange)
+ * #ffffff (White)
+ * #ffcc66 (Light Orange-ish)
+*/
+
+
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -41,7 +69,7 @@
 }
 
 .module {
-  padding: $pad;
+  padding: 20px;
   background: #eee;
 }
 

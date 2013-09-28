@@ -112,6 +112,7 @@ WSGI_APPLICATION = 'bakery.wsgi.application'
 TEMPLATE_DIRS = ()
 
 INSTALLED_APPS = (
+    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
@@ -164,8 +165,8 @@ AUTH_USER_MODEL = 'auth.BakeryUser'
 #: * client_secret
 GITHUB_CREDENTIALS = None
 
-AUTHENTICATION_BACKENDS = (
-    'social.backends.persona.PersonaAuth',
+SOCIAL_AUTH_AUTHENTICATION_BACKENDS = AUTHENTICATION_BACKENDS = (
+    #'social.backends.persona.PersonaAuth',
     'social.backends.github.GithubOAuth2',
     #    'social.backends.bitbucket.BitbucketOAuth',
     'django.contrib.auth.backends.ModelBackend',
@@ -185,5 +186,3 @@ SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/social-deassoc/'
 
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
-
-SOCIAL_AUTH_USER_MODEL = 'auth.BakeryUser'

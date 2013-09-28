@@ -165,7 +165,7 @@ AUTH_USER_MODEL = 'auth.BakeryUser'
 GITHUB_CREDENTIALS = None
 
 SOCIAL_AUTH_AUTHENTICATION_BACKENDS = AUTHENTICATION_BACKENDS = (
-    #'social.backends.persona.PersonaAuth',
+    'social.backends.persona.PersonaAuth',
     'social.backends.github.GithubOAuth2',
     #    'social.backends.bitbucket.BitbucketOAuth',
     'django.contrib.auth.backends.ModelBackend',
@@ -176,8 +176,8 @@ SOCIAL_AUTH_GITHUB_SECRET = ''
 #SOCIAL_AUTH_GITHUB_SCOPE = []
 
 SOCIAL_AUTH_LOGIN_URL = '/'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/login/done/'
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/login/error/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/login-done/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error/'
 SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/register/'
 
 SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/social-assoc/'

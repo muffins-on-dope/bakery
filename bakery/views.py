@@ -10,6 +10,12 @@ class HomeView(TemplateView):
 home = HomeView.as_view()
 
 
+class StylesView(TemplateView):
+    template_name = 'styles.html'
+
+styles = StylesView.as_view()
+
+
 class LoginErrorView(TemplateView):
     template_name = 'error.html'
 

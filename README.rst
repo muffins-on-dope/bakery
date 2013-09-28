@@ -2,7 +2,7 @@
 Bakery
 ======
 
-.. figure:: https://raw.github.com/muffins-on-dope/bakery/master/docs/source/_static/logo.jpg
+.. figure:: https://raw.github.com/muffins-on-dope/bakery/master/docs/_static/logo.jpg
    :target: http://thenounproject.com/noun/cookie-jar/#icon-No18366
    :align: right
    :alt: Logo by Nikki Rodriguez

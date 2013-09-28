@@ -11,17 +11,60 @@
     <link rel="stylesheet/less" type="text/css" href="{% static 'less/bakery.less' %}" />
   </head>
   <body>
+    <div id="wrap">
+      <div class="container">
+        <div class="page-header">
+            <div id="navbar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <a class="col-md-2" id="logo" href="/">
+                                    <img src="{% static 'img/logo.svg' %}" height="40" class="img">
+                                </a>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
+                                <nav class="col-md-6" role="navigation">
+                                    <ul class="nav nav-pills">
+                                        <li><a href="#">About</a></li>
+                                        <li><a href="#">Documentation</a></li>
+                                        {% block header_nav %}{% endblock header_nav %}
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="controls col-md-4">
+                            <a class="btn btn-primary" id="login" href="#"
+                               title="Sign in with Github">
+                              <i class="glyphicon glyphicon-github-alt"></i>
+                                Sign in with Github
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="lead">Cookies!</p>
+        {% block content %}{% endblock content %}
+     </div>
     </div>
 
-    <div class="container">
+
+    <div id="footer">
+      <div class="container">
+        <nav class="col-md-12" role="navigation">
+            <a class="logo col-md-1" href="/">
+                <img src="{% static 'img/logo.svg' %}" height="45" class="img" />
+            </a>
+
+            <ul class="nav nav-pills">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Documentation</a></li>
+                {% block footer_nav %}{% endblock footer_nav %}
+            </ul>
+        </nav>
+    </div>
     </div>
 
-
-    {% block header %}{% endblock header %}
-    {% block content %}{% endblock content %}
-    {% block footer %}{% endblock footer %}
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'js/vendor/jquery.min.js' %}" type="application/javascript"></script>

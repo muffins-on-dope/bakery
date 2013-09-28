@@ -19,6 +19,7 @@ class Command(BaseCommand):
             self.stdout.write('Importing {0}'.format(url))
         try:
             Cookie.objects.import_from_url(url)
+            self.stdout.write('Imported {0}'.format(url))
         except ValueError as exc:
             ce = CommandError(str(exc).format(url))
             if traceback:

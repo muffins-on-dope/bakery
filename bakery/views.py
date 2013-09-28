@@ -4,7 +4,6 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
-from bakery.auth.forms import UserCreationForm
 
 
 class IndexView(TemplateView):

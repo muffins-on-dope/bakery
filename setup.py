@@ -10,6 +10,37 @@ def read(*parts):
         return fp.read()
 
 
+def fullsplit(path, result=None):
+    if result is None:
+        result = []
+    head, tail = os.path.split(path)
+    if head == '':
+        return [tail] + result
+    if head == path:
+        return result
+    return fullsplit(head, [tail] + result)
+
+
+packages, data_files = [], []
+root_dir = os.path.dirname(__file__)
+if root_dir != '':
+    os.chdir(root_dir)
+src_dir = 'bakery'
+
+for dirpath, dirnames, filenames in os.walk(src_dir):
+    # Ignore dirnames that start with '.'
+    for i, dirname in enumerate(dirnames):
+        if dirname.startswith('.'):
+            del dirnames[i]
+    for filename in filenames:
+        if filename.endswith('.py'):
+            packages.append('.'.join(fullsplit(dirpath)))
+        else:
+            data_files.append(
+                [dirpath, [os.path.join(dirpath, f) for f in filenames]],
+            )
+
+
 setup(
     name='bakery',
     version='0.1a0',
@@ -23,13 +54,6 @@ setup(
         'bakery',
         'bakery.cookies',
     ],
-    package_data = {
-        'bakery': [
-            'locale/**',
-            'static/**',
-            'templates/**',
-        ],
-    },
     install_requires=[
         'Django==1.5.4',
         'PyGithub==1.19.0',
@@ -37,6 +61,7 @@ setup(
         'jsonfield>=0.9.19',
         'python-social-auth>=0.1.13',
     ],
+    data_files=data_files,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',

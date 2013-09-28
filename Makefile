@@ -24,7 +24,7 @@ clean-pyc:
 	find . -name '*~' -exec rm -f {} +
 
 lint:
-	flake8 bakery tests
+	flake8 --ignore='E122,E124,E125,E126,E128,E501,F403' --exclude="**/migrations/**" bakery tests
 	grunt jshint
 
 test:

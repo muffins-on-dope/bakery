@@ -32,18 +32,28 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="controls col-md-4">
-                            <a class="btn btn-primary" id="login" href="#"
-                               title="Sign in with Github">
-                              <i class="glyphicon glyphicon-github-alt"></i>
-                                Sign in with Github
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <p class="lead">Cookies!</p>
+        <div class="controls">
+            <a class="btn btn-primary" id="github-login" href="#"
+               title="Sign in with Github">
+                Github
+            </a>
+
+            <a class="btn btn-primary persona-button orange" id="persona-login"
+               href="javascript:persona_login()"
+               title="Sign in with Persona">
+                <span>Persona</span>
+            </a>
+
+            <!-- Define a form to send the POST data -->
+            <form method="post" action="/complete/persona/" id="persona-login-form">
+                {% csrf_token %}
+                <input type="hidden" name="assertion" id="persona-assertion" value="">
+            </form>
+        </div>
         {% block content %}{% endblock content %}
      </div>
     </div>
@@ -73,28 +83,22 @@
 
     <script src="{% static 'js/vendor/less.min.js' %}"></script>
 
+    <!-- Include BrowserID JavaScript -->
+    <script src="https://login.persona.org/include.js" type="text/javascript"></script>
+
     <!-- Setup click handler that retieves Persona assertion code and sends POST data -->
     <!-- TODO: this does not belong here! -->
     <script type="text/javascript">
-        $(function () {
-            $('#persona').click(function (e) {
-                e.preventDefault();
-                var self = $(this);
-
-                navigator.id.get(function (assertion) {
-                    if (assertion) {
-                        self.closest('form')
-                                .find('input[type=hidden]')
-                                    .attr('value', assertion)
-                                    .end()
-                                .submit();
-                    } else {
-                        console.log("error")
-                        alert('Some error occurred');
-                    }
-                });
-            });
-        });
+      function persona_login() {
+          navigator.id.get(function(assertion) {
+              if (assertion) {
+                  var assertion_field = document.getElementById("persona-assertion");
+                  assertion_field.value = assertion;
+                  var login_form = document.getElementById("persona-login-form");
+                  login_form.submit();
+              }
+          });
+      }
     </script>
 
   </body>

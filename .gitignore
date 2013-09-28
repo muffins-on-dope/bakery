@@ -8,6 +8,7 @@ dist
 
 media
 static-collected
+node_nodules
 
 !.coveragerc
 !.gitignore

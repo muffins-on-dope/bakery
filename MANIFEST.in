@@ -1,0 +1,8 @@
+include AUTHORS
+include LICENSE
+include README.rst
+recursive-include docs *
+recursive-include bakery/locale *
+recursive-include bakery/static *
+recursive-include bakery/templates *
+recursive-exclude docs/build *

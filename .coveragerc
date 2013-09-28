@@ -1,0 +1,4 @@
+[run]
+branch = True
+source = bakery/
+omit = bakery/migrations/*

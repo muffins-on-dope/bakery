@@ -1,0 +1,14 @@
+*.py[co]
+__pycache__
+.*
+*.egg-info
+coverage.xml
+build
+dist
+
+media
+static-collected
+
+!.coveragerc
+!.gitignore
+!.travis.yml

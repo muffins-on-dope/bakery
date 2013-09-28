@@ -1,0 +1,5 @@
+-r requirements/base.txt
+
+Fabric==1.8.0
+paramiko==1.11.1
+pycrypto==2.6

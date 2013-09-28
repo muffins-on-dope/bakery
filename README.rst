@@ -2,6 +2,19 @@
 Bakery
 ======
 
+.. image:: https://badge.fury.io/py/bakery.png
+    :target: http://badge.fury.io/py/bakery
+
+.. image:: https://travis-ci.org/muffins-on-dope/bakery.png?branch=master
+        :target: https://travis-ci.org/muffins-on-dope/bakery
+
+.. image:: https://coveralls.io/repos/muffins-on-dope/bakery/badge.png
+        :target: https://coveralls.io/r/muffins-on-dope/bakery
+
+.. image:: https://pypip.in/d/bakery/badge.png
+        :target: https://crate.io/packages/bakery?version=latest
+
+
 Installation
 ------------
 

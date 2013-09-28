@@ -27,6 +27,9 @@ class BakeryUser(AbstractBaseUser):
         verbose_name = _('User')
         verbose_name_plural = _('Users')
 
+    def __str__(self):
+        return self.username
+
     def get_absolute_url(self):
         # TODO
         return NotImplementedError

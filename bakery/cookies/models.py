@@ -26,5 +26,5 @@ class Cookie(models.Model):
         verbose_name = _('Cookie')
         verbose_name_plural = _('Cookies')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

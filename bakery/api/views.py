@@ -31,8 +31,8 @@ def cookies_list(request, page=1):
     if page < 1:
         page = 1
     per_page = settings.BAKERY_API_COOKIES_PER_PAGE
-    start = (page-1) * per_page
-    end =  page * per_page
+    start = (page - 1) * per_page
+    end = page * per_page
     cookies = list(Cookie.objects.values('name', 'url', 'description', 'last_change').all()[start:end])
     return JSONResponse(cookies)
 

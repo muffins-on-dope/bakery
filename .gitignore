@@ -6,6 +6,7 @@ coverage.xml
 build
 dist
 
+node_modules
 media
 static-collected
 

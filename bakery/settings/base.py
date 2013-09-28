@@ -26,7 +26,7 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Europe/Berlin'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -112,7 +112,6 @@ WSGI_APPLICATION = 'bakery.wsgi.application'
 TEMPLATE_DIRS = ()
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
@@ -121,6 +120,7 @@ INSTALLED_APPS = (
     'south',
     'social.apps.django_app.default',
     'bakery',
+    'bakery.auth',
     'bakery.cookies',
 )
 
@@ -155,6 +155,7 @@ LOGGING = {
     }
 }
 
+AUTH_USER_MODEL = 'auth.BakeryUser'
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.persona.PersonaAuth',
@@ -173,3 +174,10 @@ URL_PATH = ''
 
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+
+#: A dict for Github authentiaction accepting following keys:
+#: * login_or_token
+#: * password
+#: * client_id
+#: * client_secret
+GITHUB_CREDENTIALS = None

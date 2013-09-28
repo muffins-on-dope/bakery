@@ -6,3 +6,4 @@ recursive-include bakery/locale *
 recursive-include bakery/static *
 recursive-include bakery/templates *
 recursive-exclude docs/build *
+recursive-exclude bakery/static/less *

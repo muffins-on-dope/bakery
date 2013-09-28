@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 import codecs
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 def read(*parts):
@@ -19,17 +19,7 @@ setup(
     author_email='cg@webshox.org, info@markusholtermann.eu',
     url='https://github.com/muffins-on-dope/bakery',
     license='BSD',
-    packages=[
-        'bakery',
-        'bakery.cookies',
-    ],
-    package_data = {
-        'bakery': [
-            'locale/**',
-            'static/**',
-            'templates/**',
-        ],
-    },
+    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     install_requires=[
         'Django==1.5.4',
         'PyGithub==1.19.0',
@@ -49,5 +39,6 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Framework :: Django',
     ],
-    zip_safe=False
+    zip_safe=False,
+    include_package_data=True
 )

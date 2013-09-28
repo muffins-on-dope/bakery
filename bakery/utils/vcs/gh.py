@@ -17,8 +17,10 @@ from bakery.cookies.exceptions import (InvalidRepositoryError,
 
 def _github_setup():
     """
-    Setup the Github authentication and returns an authorized `Github object
-    from PyGithub <http://jacquev6.github.io/PyGithub/github.html>`_
+    Sets up the server-wide Github authentication for the project and returns
+    an authorized `Github object from PyGithub
+    <http://jacquev6.github.io/PyGithub/github.html>`_ which can be used to
+    list users, repos, etc.
     """
 
     credentials = getattr(settings, 'GITHUB_CREDENTIALS', None)
@@ -48,16 +50,34 @@ def _github_setup():
 
     return Github(**credentials)
 
+#: Server-wide authenticated GitHub state
 github_setup = _github_setup()
 
 
-def get_repo_from_url(url):
+def get_repo_from_url(url, gh_setup=github_setup):
+    """
+    Given an URL like (ssh://)git@github.com/user/repo.git or any other url
+    that defines the root of a repository, this function returns the PyGithub
+    resource describing that object.
+
+    One can use :func:`get_cookie_data_from_repo` or
+    :func:`get_mapping_file_from_repo` to get further information about that
+    repository such as the content of the ``cookiecutter.json`` file.
+
+    :param str url: The root URL to a github repository
+    :param gh_setup: If not the server-wide authentiaction :data:`github_setup`
+        should be used, this parameter can be set to another, e.g. user
+        authenticated PyGithub object
+    :return: Returns an instance of a ``PyGithub.Repository``.
+    :raises: ``InvalidRepositoryError`` if the given URL does not match a known
+        GitHub URL.
+    """
     if 'git@github.com' in url:
         identifier = 'git@github.com'
     elif 'https://github.com/' in url:
         identifier = 'https://github.com'
     else:
-        raise ValueError('{0} is not a valid GitHub URL')
+        raise InvalidRepositoryError('{0} is not a valid GitHub URL')
     index = url.index(identifier)
     length = len(identifier)
     start = length + index + 1  # +1 for separator after identifier
@@ -65,12 +85,37 @@ def get_repo_from_url(url):
     username, repo = path.split('/', 1)
     if repo.endswith('.git'):
         repo = repo[:-4]  # strip .git
-    user = github_setup.get_user(username)
+    user = gh_setup.get_user(username)
     repository = user.get_repo(repo)
     return repository
 
 
 def get_cookie_data_from_repo(repo):
+    """
+    Given a ``PyGithub.Repository`` instance construct a dict holding the
+    following information:
+
+    * ``name`` -- Repository name
+    * ``url`` -- The HTTP URL to view the repository in a browser
+    * ``description`` -- A brief description about the repository
+    * ``last_change`` -- A timezone aware timestamp of the last modification
+      on the repository
+    * ``mapping`` -- The content of the ``cookiecutter.json`` file (or similar)
+    * _``owner`` -- A dict with information about the owner of the repository
+
+      * ``username`` -- The user- or login name (required)
+      * ``email`` -- The email address of the user
+      * ``name`` -- The full name
+      * ``is_organization`` -- If the repository is owned by a orga: ``True``
+      * ``profile_url`` -- The HTTP URL to view the user in a browser
+
+    :param repo: A ``PyGithub.Repository`` instance
+    :return dict: The dict containing Cookie and BakeryUser information
+    :raises: ``InvalidRepositoryError`` if no mapping file can be found in the
+        given repository
+    :raises: ``InvalidContentFileEncoding`` if the content of the given file
+        cannot be parsed.
+    """
     mapping_file = get_mapping_file_from_repo(repo)
     content = get_content_from_content_file(mapping_file)
 
@@ -94,6 +139,25 @@ def get_cookie_data_from_repo(repo):
 
 
 def get_mapping_file_from_repo(repo):
+    """
+    Finds a ``cookiecutter.json`` or another JSON file in the repository root
+    and treat it as the mapping file.
+
+    The candidate selection works as follows:
+    #. All files ending with ``.json`` on the root-level will be added to a candidate set.
+    #. If now candidates have been found raise ``InvalidRepositoryError``
+    #. If more than one candidate has been found:
+
+       #. if there is a ``cookiecutter.json`` in the candidate list, use it
+       #. Otherwise raise ``InvalidRepositoryError``
+
+    #. Return there is exactly one ``JSON`` file: use it
+    #. If a mapping_file has been found, open it as a ``PyGithub.ContentFile``
+       and return the content_file
+
+    :raises: ``InvalidRepositoryError`` if there was no way to
+        deterministically find the mapping file.
+    """
     contents = repo.get_contents('/')
     if contents:
         candidates = {}
@@ -118,6 +182,14 @@ def get_mapping_file_from_repo(repo):
 
 
 def get_content_from_content_file(content_file):
+    """
+    Given a ``PyGithub.ContentFile`` this function will decode the file's data
+    decodes its JSON content.
+
+    :return dict: Returns a ``dict`` with the JSON content
+    :raises: ``InvalidContentFileEncoding`` raised if not suitable decoding
+        is defined.
+    """
     decoded = None
     if content_file.encoding == 'base64':
         decoded = standard_b64decode(content_file.content).decode('utf-8')

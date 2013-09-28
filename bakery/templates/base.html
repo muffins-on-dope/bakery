@@ -5,9 +5,11 @@
   <head>
     <meta charset="utf-8">
     <title>Bakery &ndash; Cookiecutter Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css">
-    <script src="{% static 'js/vendor/jquery.min.js' %}" type="application/javascript"></script>
+    {# TODO: only in debug build #}
+    <script href="//cdnjs.cloudflare.com/ajax/libs/less.js/1.4.1/less.min.js" type="application/javascript"></script>
+    <link href="{% static 'less/bakery.less' %}" rel="stylesheet/less" type="text/css" media="screen">
 
     <meta name="description" content="Bakery is a cookiecutter cookie index"/>
     <meta name="keywords" content="cookiekutter index cookie template"/>
@@ -16,5 +18,35 @@
     {% block header %}{% endblock header %}
     {% block content %}{% endblock content %}
     {% block footer %}{% endblock footer %}
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'js/vendor/jquery.min.js' %}" type="application/javascript"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Setup click handler that retieves Persona assertion code and sends POST data -->
+    <!-- TODO: this does not belong here! -->
+    <script type="text/javascript">
+        $(function () {
+            $('#persona').click(function (e) {
+                e.preventDefault();
+                var self = $(this);
+
+                navigator.id.get(function (assertion) {
+                    if (assertion) {
+                        self.closest('form')
+                                .find('input[type=hidden]')
+                                    .attr('value', assertion)
+                                    .end()
+                                .submit();
+                    } else {
+                        console.log("error")
+                        alert('Some error occurred');
+                    }
+                });
+            });
+        });
+    </script>
+
   </body>
 </html>

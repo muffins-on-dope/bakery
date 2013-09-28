@@ -3,9 +3,14 @@ from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView, RedirectView
 from django.contrib import auth
 
+from bakery.cookies.models import Cookie
+
 
 class HomeView(TemplateView):
     template_name = 'home.html'
+
+    def get_context_data(self):
+        return {'cookies': Cookie.objects.all()}
 
 home = HomeView.as_view()
 

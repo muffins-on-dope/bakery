@@ -13,12 +13,12 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('url', self.gf('django.db.models.fields.URLField')(max_length=200)),
-            ('owner', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('owner', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.BakeryUser'])),
             ('description', self.gf('django.db.models.fields.TextField')(default='')),
             ('license', self.gf('django.db.models.fields.CharField')(default='', max_length=50)),
-            ('last_change', self.gf('django.db.models.fields.DateTimeField')()),
-            ('last_post', self.gf('django.db.models.fields.DateTimeField')()),
-            ('mapping', self.gf('jsonfield.fields.JSONField')()),
+            ('last_change', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('last_poll', self.gf('django.db.models.fields.DateTimeField')(null=True)),
+            ('mapping', self.gf('jsonfield.fields.JSONField')(default={})),
         ))
         db.send_create_signal('cookies', ['Cookie'])
 
@@ -29,52 +29,29 @@ class Migration(SchemaMigration):
 
 
     models = {
-        'auth.group': {
-            'Meta': {'object_name': 'Group'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '80', 'unique': 'True'}),
-            'permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['auth.Permission']", 'blank': 'True'})
-        },
-        'auth.permission': {
-            'Meta': {'unique_together': "(('content_type', 'codename'),)", 'ordering': "('content_type__app_label', 'content_type__model', 'codename')", 'object_name': 'Permission'},
-            'codename': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        'auth.user': {
-            'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['auth.Group']", 'blank': 'True'}),
+        'auth.bakeryuser': {
+            'Meta': {'object_name': 'BakeryUser'},
+            'email': ('django.db.models.fields.EmailField', [], {'blank': 'True', 'unique': 'True', 'max_length': '254', 'null': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'is_organization': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'blank': 'True', 'max_length': '100', 'null': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['auth.Permission']", 'blank': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'max_length': '30', 'unique': 'True'})
-        },
-        'contenttypes.contenttype': {
-            'Meta': {'unique_together': "(('app_label', 'model'),)", 'ordering': "('name',)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
-            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'profile_url': ('django.db.models.fields.URLField', [], {'blank': 'True', 'max_length': '200', 'null': 'True'}),
+            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '50'})
         },
         'cookies.cookie': {
             'Meta': {'object_name': 'Cookie'},
             'description': ('django.db.models.fields.TextField', [], {'default': "''"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_change': ('django.db.models.fields.DateTimeField', [], {}),
-            'last_post': ('django.db.models.fields.DateTimeField', [], {}),
+            'last_change': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'last_poll': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
             'license': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '50'}),
-            'mapping': ('jsonfield.fields.JSONField', [], {}),
+            'mapping': ('jsonfield.fields.JSONField', [], {'default': '{}'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
+            'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.BakeryUser']"}),
             'url': ('django.db.models.fields.URLField', [], {'max_length': '200'})
         }
     }

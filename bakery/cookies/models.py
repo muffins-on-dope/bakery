@@ -16,7 +16,7 @@ class Cookie(models.Model):
     license = models.CharField(_('License'), max_length=50, default='')
     last_change = models.DateTimeField(_('Last change'), null=True)
     last_poll = models.DateTimeField(_('Last poll'), null=True)
-    mapping = JSONField()
+    mapping = JSONField(default={})
 
     class Meta:
         verbose_name = _('Cookie')

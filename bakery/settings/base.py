@@ -111,7 +111,6 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
@@ -119,6 +118,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'bakery',
+    'bakery.auth',
     'bakery.cookies',
 )
 
@@ -153,6 +153,7 @@ LOGGING = {
     }
 }
 
+AUTH_USER_MODEL = 'auth.BakeryUser'
 
 #: A dict for Github authentiaction accepting following keys:
 #: * login_or_token

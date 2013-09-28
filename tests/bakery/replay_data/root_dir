@@ -1,0 +1,62 @@
+[
+  {
+    "name": ".gitignore",
+    "path": ".gitignore",
+    "sha": "cdef1f3a76ae75fa3ddb8d4d68ffe6d68608e55b",
+    "size": 410,
+    "url": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/.gitignore?ref=master",
+    "html_url": "https://github.com/audreyr/cookiecutter-pypackage/blob/master/.gitignore",
+    "git_url": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/git/blobs/cdef1f3a76ae75fa3ddb8d4d68ffe6d68608e55b",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/.gitignore?ref=master",
+      "git": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/git/blobs/cdef1f3a76ae75fa3ddb8d4d68ffe6d68608e55b",
+      "html": "https://github.com/audreyr/cookiecutter-pypackage/blob/master/.gitignore"
+    }
+  },
+  {
+    "name": "README.rst",
+    "path": "README.rst",
+    "sha": "4783dc31c64d050eae569b56ce1fa7259a98cb12",
+    "size": 2621,
+    "url": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/README.rst?ref=master",
+    "html_url": "https://github.com/audreyr/cookiecutter-pypackage/blob/master/README.rst",
+    "git_url": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/git/blobs/4783dc31c64d050eae569b56ce1fa7259a98cb12",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/README.rst?ref=master",
+      "git": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/git/blobs/4783dc31c64d050eae569b56ce1fa7259a98cb12",
+      "html": "https://github.com/audreyr/cookiecutter-pypackage/blob/master/README.rst"
+    }
+  },
+  {
+    "name": "cookiecutter.json",
+    "path": "cookiecutter.json",
+    "sha": "43ed688614302ff3ed8191706eb695ca00b6579f",
+    "size": 348,
+    "url": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/cookiecutter.json?ref=master",
+    "html_url": "https://github.com/audreyr/cookiecutter-pypackage/blob/master/cookiecutter.json",
+    "git_url": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/git/blobs/43ed688614302ff3ed8191706eb695ca00b6579f",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/cookiecutter.json?ref=master",
+      "git": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/git/blobs/43ed688614302ff3ed8191706eb695ca00b6579f",
+      "html": "https://github.com/audreyr/cookiecutter-pypackage/blob/master/cookiecutter.json"
+    }
+  },
+  {
+    "name": "{{cookiecutter.repo_name}}",
+    "path": "{{cookiecutter.repo_name}}",
+    "sha": "219c3188178c8658f75b792b09e3ed2fd888179a",
+    "size": 0,
+    "url": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/{{cookiecutter.repo_name}}?ref=master",
+    "html_url": "https://github.com/audreyr/cookiecutter-pypackage/tree/master/{{cookiecutter.repo_name}}",
+    "git_url": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/git/trees/219c3188178c8658f75b792b09e3ed2fd888179a",
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/{{cookiecutter.repo_name}}?ref=master",
+      "git": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/git/trees/219c3188178c8658f75b792b09e3ed2fd888179a",
+      "html": "https://github.com/audreyr/cookiecutter-pypackage/tree/master/{{cookiecutter.repo_name}}"
+    }
+  }
+]

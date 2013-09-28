@@ -1,0 +1,17 @@
+{
+  "name": "cookiecutter.json",
+  "path": "cookiecutter.json",
+  "sha": "43ed688614302ff3ed8191706eb695ca00b6579f",
+  "size": 348,
+  "url": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/cookiecutter.json?ref=master",
+  "html_url": "https://github.com/audreyr/cookiecutter-pypackage/blob/master/cookiecutter.json",
+  "git_url": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/git/blobs/43ed688614302ff3ed8191706eb695ca00b6579f",
+  "type": "file",
+  "content": "ewoJImZ1bGxfbmFtZSI6ICJBdWRyZXkgUm95IiwKCSJlbWFpbCI6ICJhdWRy\nZXlyQGdtYWlsLmNvbSIsCgkiZ2l0aHViX3VzZXJuYW1lIjogImF1ZHJleXIi\nLAoJInByb2plY3RfbmFtZSI6ICJQeXRob24gQm9pbGVycGxhdGUiLAoJInJl\ncG9fbmFtZSI6ICJib2lsZXJwbGF0ZSIsCgkicHJvamVjdF9zaG9ydF9kZXNj\ncmlwdGlvbiI6ICJQeXRob24gQm9pbGVycGxhdGUgY29udGFpbnMgYWxsIHRo\nZSBib2lsZXJwbGF0ZSB5b3UgbmVlZCB0byBjcmVhdGUgYSBQeXRob24gcGFj\na2FnZS4iLAoJInJlbGVhc2VfZGF0ZSI6ICIyMDEzLTA4LTExIiwKCSJ5ZWFy\nIjogIjIwMTMiLAoJInZlcnNpb24iOiAiMC4xLjAiCn0K\n",
+  "encoding": "base64",
+  "_links": {
+    "self": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/cookiecutter.json?ref=master",
+    "git": "https://api.github.com/repos/audreyr/cookiecutter-pypackage/git/blobs/43ed688614302ff3ed8191706eb695ca00b6579f",
+    "html": "https://github.com/audreyr/cookiecutter-pypackage/blob/master/cookiecutter.json"
+  }
+}

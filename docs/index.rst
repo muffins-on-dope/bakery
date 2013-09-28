@@ -70,8 +70,8 @@ Superuser & example data
 .. code-block:: bash
 
     $ # Create a new super user
-    $ python manage.py createsuperuser
-    $ python import.py
+    $ python manage.py createsuperuser <Social-Username>
+    $ python manage.py importcookie <URL-to-GitHub-repository>
 
 Now you can run the webserver and start using the site.
 
@@ -80,6 +80,9 @@ Now you can run the webserver and start using the site.
    $ python manage.py runserver
 
 This starts a local webserver on `localhost:8000 <http://localhost:8000/>`_.
+
+Log in on that page with your social account and the social auth provider of
+your choice.
 
 Resources
 ---------

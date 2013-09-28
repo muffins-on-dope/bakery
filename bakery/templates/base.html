@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load i18n %}
 {% load static from staticfiles %}
+{% load url from future %}
 <html>
 <head>
     <meta charset="utf-8">
@@ -32,8 +33,8 @@
                       {% block header_nav %}{% endblock header_nav %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        {% if request.user %}
-                            Hey {{ request.user.username }}!
+                        {% if request.user.is_authenticated %}
+                            Hey {{ request.user.username }}! <a href="{% url "logout" %}">Logout!</a>
                         {% else %}
                             <li>
                                 <a class="btn btn-default color2" id="github-login" href="{% url 'social:begin' 'github' %}"

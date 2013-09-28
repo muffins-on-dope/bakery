@@ -25,6 +25,7 @@ clean-pyc:
 
 lint:
 	flake8 bakery tests
+	grunt jshint
 
 test:
 	python manage.py test --settings=bakery.settings.test

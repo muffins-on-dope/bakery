@@ -8,13 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {# TODO: only in debug build #}
-    <script href="//cdnjs.cloudflare.com/ajax/libs/less.js/1.4.1/less.min.js" type="application/javascript"></script>
-    <link href="{% static 'less/bakery.less' %}" rel="stylesheet/less" type="text/css" media="screen">
-
-    <meta name="description" content="Bakery is a cookiecutter cookie index"/>
-    <meta name="keywords" content="cookiekutter index cookie template"/>
+    <link rel="stylesheet/less" type="text/css" href="{% static 'less/bakery.less' %}" />
   </head>
   <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    </div>
+
+    <div class="container">
+    </div>
+
+
     {% block header %}{% endblock header %}
     {% block content %}{% endblock content %}
     {% block footer %}{% endblock footer %}
@@ -22,7 +26,9 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'js/vendor/jquery.min.js' %}" type="application/javascript"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{% static 'js/vendor/bootstrap.min.js' %}" type="application/javascript"></script>
+
+    <script src="{% static 'js/vendor/less.min.js' %}"></script>
 
     <!-- Setup click handler that retieves Persona assertion code and sends POST data -->
     <!-- TODO: this does not belong here! -->

@@ -8,6 +8,7 @@ install:
   - pip install -r requirements/test.txt
 
 script:
+  - flake8 bakery --ignore='E122,E124,E125,E126,E128,E501,F403' --exclude="**/migrations/**"
   - coverage run manage.py test --settings=bakery.settings.test
 
 after_success:

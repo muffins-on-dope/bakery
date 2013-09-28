@@ -124,7 +124,7 @@ def get_cookie_data_from_repo(repo):
         'username': owner.login,
         'email': owner.email,
         'name': owner.name,
-        'is_organization': repo.organization is not None,
+        'is_organization': owner.type == "Organization",
         'profile_url': owner.html_url,
     }
     data = {
@@ -172,14 +172,13 @@ def get_mapping_file_from_repo(repo):
         if not candidates:
             raise InvalidRepositoryError('No JSON mapping file found!')
         if len(candidates) > 1:
-            if 'cookiecutter.json' in candidates:
-                mapping_file = rd
-            else:
+            mapping_file = candidates.get('cookiecutter.json', None)
+            if mapping_file is None:
                 raise InvalidRepositoryError('Cannot decide for a mapping file! '
                     'Multiple files found: {0}'.format(', '.join(candidates.keys)))
         else:
             mapping_file = list(candidates.values())[0]
-        return repo.get_contents(mapping_file['name'])
+        return repo.get_contents('/' + mapping_file['name'])
     raise InvalidRepositoryError('The repository does not have any content!')
 
 

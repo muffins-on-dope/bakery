@@ -10,6 +10,7 @@ from bakery.cookies.models import Cookie
 class Command(BaseCommand):
 
     url = '<url>'
+    args = 'url'
     help = 'Add the cookie defined by the VCS URL to the database.'
 
     def handle(self, url, *args, **options):

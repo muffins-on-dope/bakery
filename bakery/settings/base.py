@@ -90,6 +90,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+#    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 )
 
 
@@ -101,7 +102,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
 
     'social.apps.django_app.context_processors.backends',
-    'social.apps.django_app.context_processors.login_redirect',
 )
 
 ROOT_URLCONF = 'bakery.urls'
@@ -175,13 +175,18 @@ SOCIAL_AUTH_GITHUB_KEY = ''
 SOCIAL_AUTH_GITHUB_SECRET = ''
 #SOCIAL_AUTH_GITHUB_SCOPE = []
 
-SOCIAL_AUTH_LOGIN_URL = '/'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/login-done/'
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error/'
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/register/'
 
-SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/social-assoc/'
-SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/social-deassoc/'
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL = '/login-error/'
+LOGOUT_URL = '/logout/'
+
+SOCIAL_AUTH_LOGIN_URL = LOGIN_URL
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = LOGIN_REDIRECT_URL
+SOCIAL_AUTH_LOGIN_ERROR_URL = LOGIN_ERROR_URL
+
+# SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/social-assoc/'
+# SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/social-deassoc/'
 
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'

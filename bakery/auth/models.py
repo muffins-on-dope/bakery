@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser
 
 from bakery.auth.managers import BakeryUserManager
@@ -17,6 +18,7 @@ class BakeryUser(AbstractBaseUser):
     is_active = models.BooleanField(_('Active'), default=True)
     is_organization = models.BooleanField(_('Organization'))
     profile_url = models.URLField(_('Profile'), blank=True, null=True)
+    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
     objects = BakeryUserManager()
 

@@ -72,7 +72,7 @@ Superuser & example data
 
 Now you can run the webserver and start using the site.
 
-.. code-block::
+.. code-block:: bash
 
    $ python manage.py runserver
 

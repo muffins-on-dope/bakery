@@ -1,4 +1,4 @@
--r requirements/base.txt
+-r base.txt
 
 Fabric==1.8.0
 paramiko==1.11.1

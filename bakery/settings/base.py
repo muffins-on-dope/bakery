@@ -99,8 +99,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
-
     'social.apps.django_app.context_processors.backends',
 )
 
@@ -190,3 +191,17 @@ SOCIAL_AUTH_LOGIN_ERROR_URL = LOGIN_ERROR_URL
 
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.social_auth.associate_by_email',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.user.user_details'
+)

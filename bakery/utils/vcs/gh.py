@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import json
 import pytz
+
+from base64 import standard_b64decode
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
@@ -8,7 +11,8 @@ from django.utils.timezone import make_aware
 
 from github import Github
 
-from bakery.auth.models import BakeryUser
+from bakery.cookies.exceptions import (InvalidRepositoryError,
+    InvalidContentFileEncoding)
 
 
 def _github_setup():
@@ -67,18 +71,58 @@ def get_repo_from_url(url):
 
 
 def get_cookie_data_from_repo(repo):
-    is_organization = repo.organization is not None
-    username = repo.owner.login
-    owner = BakeryUser.objects.get_or_create(
-        username=username,
-        is_organization=is_organization
-    )
-    owner = owner[0]  # We don't care if the owner has been created or not
+    mapping_file = get_mapping_file_from_repo(repo)
+    content = get_content_from_content_file(mapping_file)
+
+    owner = repo.owner
+    owner_data = {
+        'username': owner.login,
+        'email': owner.email,
+        'name': owner.name,
+        'is_organization': repo.organization is not None,
+        'profile_url': owner.html_url,
+    }
     data = {
         'name': repo.name,
         'url': repo.html_url,
-        'owner': owner,
         'description': repo.description,
         'last_change': make_aware(repo.updated_at, pytz.UTC),
+        'mapping': content,
+        '_owner': owner_data,
     }
     return data
+
+
+def get_mapping_file_from_repo(repo):
+    contents = repo.get_contents('/')
+    if contents:
+        candidates = {}
+        for rd in contents.raw_data:
+            if rd['type'] != 'file':
+                continue
+            if rd['name'].endswith('.json'):
+                candidates[rd['name']] = rd
+
+        if not candidates:
+            raise InvalidRepositoryError('No JSON mapping file found!')
+        if len(candidates) > 1:
+            if 'cookiecutter.json' in candidates:
+                mapping_file = rd
+            else:
+                raise InvalidRepositoryError('Cannot decide for a mapping file! '
+                    'Multiple files found: {0}'.format(', '.join(candidates.keys)))
+        else:
+            mapping_file = list(candidates.values())[0]
+        return repo.get_contents(mapping_file['name'])
+    raise InvalidRepositoryError('The repository does not have any content!')
+
+
+def get_content_from_content_file(content_file):
+    decoded = None
+    if content_file.encoding == 'base64':
+        decoded = standard_b64decode(content_file.content).decode('utf-8')
+    if decoded is None:
+        raise InvalidContentFileEncoding(
+            'Encoding {0} cannot be decoded'.format(content_file.encoding))
+    mapping_data = json.loads(decoded)
+    return mapping_data

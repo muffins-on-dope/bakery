@@ -10,51 +10,54 @@
     {# TODO: only in debug build #}
     <link rel="stylesheet/less" type="text/css" href="{% static 'less/bakery.less' %}" />
   </head>
-  <body>
+  <body data-spy="scroll" data-target="#bakery_navbar">
     <div id="wrap">
       <div class="container">
         <div class="page-header">
-            <div id="navbar">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="row">
-                                <a class="col-md-2" id="logo" href="/">
-                                    <img src="{% static 'img/logo.svg' %}" height="40" class="img">
-                                </a>
-
-                                <nav class="col-md-6" role="navigation">
-                                    <ul class="nav nav-pills">
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Documentation</a></li>
-                                        {% block header_nav %}{% endblock header_nav %}
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-
-                        <div class="controls col-md-4">
-                             <a class="btn btn-primary" id="github-login" href="#"
-                               title="Sign in with Github">
-                                Github
-                            </a>
-
-                            <a class="btn btn-primary persona-button orange" id="persona-login"
-                               href="javascript:persona_login()"
-                               title="Sign in with Persona">
-                                <span>Persona</span>
-                            </a>
-
-                            <!-- Define a form to send the POST data -->
-                            <form method="post" action="/complete/persona/" id="persona-login-form">
-                                {% csrf_token %}
-                                <input type="hidden" name="assertion" id="persona-assertion" value="">
-                            </form>
-
-                    </div>
-                </div>
+          <nav role="navigation" class="navbar navbar-fixed-top" id="bakery_navbar">
+            <div class="navbar-header">
+                <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img src="{% static 'img/logo.svg' %}" height="40" class="img"></a>
             </div>
-        </div>
+
+            <div class="collapse navbar-collapse" id="bakery_navbar_nav">
+                <ul class="nav navbar-nav">
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Documentation</a></li>
+                  {% block header_nav %}{% endblock header_nav %}
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                  <li>
+                    <a class="btn btn-default color2" id="github-login" href="#"
+                       title="Sign in with Github">
+                        Github
+                    </a>
+                  </li>
+
+                  <li>
+                    <a class="btn btn-default color2" id="persona-login"
+                       href="javascript:persona_login()"
+                       title="Sign in with Persona">
+                        Persona
+                    </a>
+
+                    <!-- Define a form to send the POST data -->
+                    <form method="post" action="/complete/persona/" id="persona-login-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="assertion" id="persona-assertion" value="">
+                    </form>
+                  </li>
+
+                </ul>
+
+            </div>
+        </nav>
         {% block content %}{% endblock content %}
      </div>
     </div>

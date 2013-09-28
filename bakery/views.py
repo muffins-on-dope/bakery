@@ -1,7 +1,19 @@
 # -*- coding: utf-8 -*-
+from django.views.generic import FormView, TemplateView
+from django.shortcuts import render
+from django.contrib import messages
+from django.contrib import auth
+from django.contrib.auth.forms import AuthenticationForm
+from bakery.auth.forms import UserCreationForm
 
-from django.shortcuts import render_to_response
+
+class IndexView(TemplateView):
+    template_name = 'index.html'
+
+index = IndexView.as_view()
 
 
-def index(request):
-    return render_to_response('index.html')
+class LoginErrorView(TemplateView):
+    template_name = 'error.html'
+
+login_error = LoginErrorView.as_view()

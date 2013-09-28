@@ -90,7 +90,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
+#    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 )
 
 
@@ -177,20 +177,16 @@ SOCIAL_AUTH_GITHUB_SECRET = ''
 
 
 LOGIN_URL = '/'
-LOGIN_REDIRECT_URL = '/login-done/'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL = '/login-error/'
 LOGOUT_URL = '/logout/'
 
 SOCIAL_AUTH_LOGIN_URL = LOGIN_URL
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = LOGIN_REDIRECT_URL
 SOCIAL_AUTH_LOGIN_ERROR_URL = LOGIN_ERROR_URL
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/register/'
 
-
-
-
-SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/social-assoc/'
-SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/social-deassoc/'
+# SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/social-assoc/'
+# SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/social-deassoc/'
 
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'

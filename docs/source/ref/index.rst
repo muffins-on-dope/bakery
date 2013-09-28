@@ -5,4 +5,5 @@ Reference
 .. toctree::
    :maxdepth: 2
 
-   utils
+   api/index
+   utils/index

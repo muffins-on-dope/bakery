@@ -19,11 +19,6 @@ Welcome to bakery's documentation!
 .. image:: https://pypip.in/d/bakery/badge.png
         :target: https://crate.io/packages/bakery?version=latest
 
-.. toctree::
-   :maxdepth: 2
-
-   source/reference
-
 
 Installation
 ------------
@@ -85,6 +80,16 @@ This starts a local webserver on `localhost:8000 <http://localhost:8000/>`_.
 
 Log in on that page with your social account and the social auth provider of
 your choice.
+
+
+Reference
+---------
+
+.. toctree::
+   :maxdepth: 2
+
+   source/ref/index
+
 
 Resources
 ---------

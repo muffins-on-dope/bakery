@@ -6,7 +6,7 @@ from django.core.exceptions import ImproperlyConfigured
 from github import Github
 
 
-def github_setup():
+def _github_setup():
     """
     Setup the Github authentication and returns an authorized `Github object
     from PyGithub <http://jacquev6.github.io/PyGithub/github.html>`_
@@ -39,4 +39,4 @@ def github_setup():
 
     return Github(**credentials)
 
-github = github_setup()
+github_setup = _github_setup()

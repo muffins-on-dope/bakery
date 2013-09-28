@@ -11,3 +11,7 @@ DATABASES = {
         'NAME': '',
     }
 }
+
+INSTALLED_APPS = INSTALLED_APPS + ('tests',)
+
+TEST_RUNNER = 'discover_runner.DiscoverRunner'

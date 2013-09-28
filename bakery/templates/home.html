@@ -1,27 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<table class="table table-hover table-bordered table-condensed">
-    <caption>Cookies</caption>
-    <thead>
-      <tr>
-        <th scope="row">Name</th>
-        <th scope="row">URL</th>
-        <th scope="row">License</th>
-        <th scope="row">Last change</th>
-      </tr>
-    </thead>
-    <tbody>
-  {% for cookie in cookies %}
-    <tr>
-      <td>{{ cookie.name }}</td>
-      <td>{{ cookie.url }}</td>
-      <td>{{ cookie.license }}</td>
-      <td>{{ cookie.last_change|date }}</td>
-    </tr>
-  {% endfor %}
-    </tbody>
-  </table>
-</table>
-
+<h4>Cookies</h4>
+<ul class="list-group color1">
+    {% for cookie in cookies %}
+    <li class="list-group-item">
+        {{ cookie.name }}
+        <span class="badge color1">
+            {{ cookie.last_change|date }}
+        </span>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock content %}

@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 
+import pytz
+
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.timezone import make_aware
 
 from github import Github
+
+from bakery.auth.models import BakeryUser
 
 
 def _github_setup():
@@ -40,3 +45,40 @@ def _github_setup():
     return Github(**credentials)
 
 github_setup = _github_setup()
+
+
+def get_repo_from_url(url):
+    if 'git@github.com' in url:
+        identifier = 'git@github.com'
+    elif 'https://github.com/' in url:
+        identifier = 'https://github.com'
+    else:
+        raise ValueError('{0} is not a valid GitHub URL')
+    index = url.index(identifier)
+    length = len(identifier)
+    start = length + index + 1  # +1 for separator after identifier
+    path = url[start:]
+    username, repo = path.split('/', 1)
+    if repo.endswith('.git'):
+        repo = repo[:-4]  # strip .git
+    user = github_setup.get_user(username)
+    repository = user.get_repo(repo)
+    return repository
+
+
+def get_cookie_data_from_repo(repo):
+    is_organization = repo.organization is not None
+    username = repo.owner.login
+    owner = BakeryUser.objects.get_or_create(
+        username=username,
+        is_organization=is_organization
+    )
+    owner = owner[0]  # We don't care if the owner has been created or not
+    data = {
+        'name': repo.name,
+        'url': repo.html_url,
+        'owner': owner,
+        'description': repo.description,
+        'last_change': make_aware(repo.updated_at, pytz.UTC),
+    }
+    return data

@@ -48,7 +48,7 @@ class TestCookieModel(TestCase):
     def test_repository(self):
         httpretty.register_uri(httpretty.GET,
             'https://api.github.com/repos/audreyr/cookiecutter-pypackage',
-            body=read(__file__, 'replay_data', 'cookie-repository'),
+            body=read(__file__, '..', '_replay_data', 'cookiecutter-pypacker-repository'),
             content_type='application/json; charset=utf-8'
         )
 

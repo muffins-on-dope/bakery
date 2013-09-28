@@ -33,22 +33,22 @@ class TestCommands(TestCase):
     def test_importcookie(self):
         httpretty.register_uri(httpretty.GET,
             'https://api.github.com/repos/audreyr/cookiecutter-pypackage',
-            body=read(__file__, 'replay_data', 'repository'),
+            body=read(__file__, '..', '_replay_data', 'cookiecutter-pypacker-repository'),
             content_type='application/json; charset=utf-8'
         )
         httpretty.register_uri(httpretty.GET,
             'https://api.github.com/users/audreyr',
-            body=read(__file__, 'replay_data', 'owner'),
+            body=read(__file__, '..', '_replay_data', 'audreyr'),
             content_type='application/json; charset=utf-8'
         )
         httpretty.register_uri(httpretty.GET,
             'https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/',
-            body=read(__file__, 'replay_data', 'root_dir'),
+            body=read(__file__, '..', '_replay_data', 'cookiecutter-pypacker-rootdir'),
             content_type='application/json; charset=utf-8'
         )
         httpretty.register_uri(httpretty.GET,
             'https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/cookiecutter.json',
-            body=read(__file__, 'replay_data', 'cookiecutter.json'),
+            body=read(__file__, '..', '_replay_data', 'cookiecutter-pypacker-cookiecutter.json'),
             content_type='application/json; charset=utf-8'
         )
         out = StringIO()
@@ -59,22 +59,22 @@ class TestCommands(TestCase):
     def test_importcookie_verbose(self):
         httpretty.register_uri(httpretty.GET,
             'https://api.github.com/repos/audreyr/cookiecutter-pypackage',
-            body=read(__file__, 'replay_data', 'repository'),
+            body=read(__file__, '..', '_replay_data', 'cookiecutter-pypacker-repository'),
             content_type='application/json; charset=utf-8'
         )
         httpretty.register_uri(httpretty.GET,
             'https://api.github.com/users/audreyr',
-            body=read(__file__, 'replay_data', 'owner'),
+            body=read(__file__, '..', '_replay_data', 'audreyr'),
             content_type='application/json; charset=utf-8'
         )
         httpretty.register_uri(httpretty.GET,
             'https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/',
-            body=read(__file__, 'replay_data', 'root_dir'),
+            body=read(__file__, '..', '_replay_data', 'cookiecutter-pypacker-rootdir'),
             content_type='application/json; charset=utf-8'
         )
         httpretty.register_uri(httpretty.GET,
             'https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/cookiecutter.json',
-            body=read(__file__, 'replay_data', 'cookiecutter.json'),
+            body=read(__file__, '..', '_replay_data', 'cookiecutter-pypacker-cookiecutter.json'),
             content_type='application/json; charset=utf-8'
         )
         out = StringIO()

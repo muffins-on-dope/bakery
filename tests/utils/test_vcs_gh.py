@@ -41,7 +41,7 @@ class TestGithub(TestCase):
     def test_get_repo_ssh_url(self):
         httpretty.register_uri(httpretty.GET,
             'https://api.github.com/repos/muffins-on-dope/bakery',
-            body=read(__file__, 'replay_data', 'github--repository'),
+            body=read(__file__, '..', '_replay_data', 'bakery-repository'),
             content_type='application/json; charset=utf-8'
         )
         repo = get_repo_from_url('git@github.com:muffins-on-dope/bakery')
@@ -51,7 +51,7 @@ class TestGithub(TestCase):
     def test_get_repo_ssh_url_git(self):
         httpretty.register_uri(httpretty.GET,
             'https://api.github.com/repos/muffins-on-dope/bakery',
-            body=read(__file__, 'replay_data', 'github--repository'),
+            body=read(__file__, '..', '_replay_data', 'bakery-repository'),
             content_type='application/json; charset=utf-8'
         )
         repo = get_repo_from_url('git@github.com:muffins-on-dope/bakery.git')
@@ -61,7 +61,7 @@ class TestGithub(TestCase):
     def test_get_repo_https_url(self):
         httpretty.register_uri(httpretty.GET,
             'https://api.github.com/repos/muffins-on-dope/bakery',
-            body=read(__file__, 'replay_data', 'github--repository'),
+            body=read(__file__, '..', '_replay_data', 'bakery-repository'),
             content_type='application/json; charset=utf-8'
         )
         repo = get_repo_from_url('https://github.com/muffins-on-dope/bakery')

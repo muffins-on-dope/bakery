@@ -15,7 +15,11 @@ class Command(BaseCommand):
     def handle(self, username, *args, **options):
         traceback = options.get('traceback', False)
         try:
-            BakeryUser.objects.create_superuser(username, None)
+            BakeryUser.objects.create_user(
+                username=username,
+                email=None,
+                password=None
+            )
             self.stdout.write('Created {0}'.format(username))
         except ValueError as exc:
             ce = CommandError(exc)

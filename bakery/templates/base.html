@@ -31,28 +31,31 @@
                       <li><a href="#">Documentation</a></li>
                       {% block header_nav %}{% endblock header_nav %}
                     </ul>
-
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a class="btn btn-default color2" id="github-login" href="{% url 'social:begin' 'github' %}"
-                                title="Sign in with Github">
-                                Github
-                            </a>
-                        </li>
+                        {% if request.user %}
+                            Hey {{ request.user.username }}!
+                        {% else %}
+                            <li>
+                                <a class="btn btn-default color2" id="github-login" href="{% url 'social:begin' 'github' %}"
+                                    title="Sign in with Github">
+                                    Github
+                                </a>
+                            </li>
 
-                        <li>
-                            <a class="btn btn-default color2" id="persona-login"
-                            href="javascript:persona_login()"
-                            title="Sign in with Persona">
-                            Persona
-                            </a>
+                            <li>
+                                <a class="btn btn-default color2" id="persona-login"
+                                href="javascript:persona_login()"
+                                title="Sign in with Persona">
+                                Persona
+                                </a>
 
-                            <!-- Define a form to send the POST data -->
-                            <form method="post" action="/complete/persona/" id="persona-login-form">
-                                {% csrf_token %}
-                                <input type="hidden" name="assertion" id="persona-assertion" value="">
-                            </form>
-                        </li>
+                                <!-- Define a form to send the POST data -->
+                                <form method="post" action="/complete/persona/" id="persona-login-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="assertion" id="persona-assertion" value="">
+                                </form>
+                            </li>
+                        {% endif %}
                     </ul>
 
                 </div>

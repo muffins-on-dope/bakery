@@ -12,7 +12,7 @@ from django.utils.timezone import make_aware
 from github import Github
 
 from bakery.cookies.exceptions import (InvalidRepositoryError,
-    InvalidContentFileEncoding)
+                                       InvalidContentFileEncoding)
 
 
 def _github_setup():
@@ -34,19 +34,19 @@ def _github_setup():
     forbidden_keys = given_keys - allowed_keys
     if given_keys - allowed_keys:
         raise ImproperlyConfigured('Invalid keys in GITHUB_CREDENTIALS: '
-            '{0}'.format(','.join(forbidden_keys)))
+                                   '{0}'.format(','.join(forbidden_keys)))
 
     if 'password' in credentials and not 'login_or_token' in credentials:
         raise ImproperlyConfigured('You need to define the login_or_token to '
-           'use password authentiaction in GITHUB_CREDENTIALS')
+                                   'use password authentiaction in GITHUB_CREDENTIALS')
 
     if 'client_secret' in credentials and not 'client_id' in credentials:
         raise ImproperlyConfigured('You need to define the client_id to '
-           'use client_secret authentiaction in GITHUB_CREDENTIALS')
+                                   'use client_secret authentiaction in GITHUB_CREDENTIALS')
 
     if 'client_id' in credentials and not 'client_secret' in credentials:
         raise ImproperlyConfigured('You need to define the client_secret to '
-           'use client_id authentiaction in GITHUB_CREDENTIALS')
+                                   'use client_id authentiaction in GITHUB_CREDENTIALS')
 
     return Github(**credentials)
 
@@ -182,7 +182,7 @@ def get_mapping_file_from_repo(repo):
             mapping_file = candidates.get('cookiecutter.json', None)
             if mapping_file is None:
                 raise InvalidRepositoryError('Cannot decide for a mapping file! '
-                    'Multiple files found: {0}'.format(', '.join(candidates.keys)))
+                                             'Multiple files found: {0}'.format(', '.join(candidates.keys)))
         else:
             mapping_file = list(candidates.values())[0]
         return repo.get_contents('/' + mapping_file['name'])

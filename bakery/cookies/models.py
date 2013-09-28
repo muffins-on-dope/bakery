@@ -8,7 +8,7 @@ from jsonfield import JSONField
 
 from bakery.cookies.managers import CookieManager
 from bakery.utils.vcs.gh import (fork_repository, get_cookie_data_from_repo,
-    get_repo_from_full_name)
+                                 get_repo_from_full_name)
 
 
 class Cookie(models.Model):
@@ -16,7 +16,7 @@ class Cookie(models.Model):
     owner_name = models.CharField(_('Owner name'), max_length=50)
     url = models.URLField(_('URL'), unique=True)
     owner = models.ForeignKey(get_user_model(), verbose_name=_('User'),
-        on_delete=models.CASCADE)
+                              on_delete=models.CASCADE)
     description = models.TextField(_('Description'), default='')
     license = models.CharField(_('License'), max_length=50, default='')
     last_change = models.DateTimeField(_('Last change'), null=True)

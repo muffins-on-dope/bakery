@@ -152,3 +152,11 @@ LOGGING = {
         },
     }
 }
+
+
+#: A dict for Github authentiaction accepting following keys:
+#: * login_or_token
+#: * password
+#: * client_id
+#: * client_secret
+GITHUB_CREDENTIALS = None

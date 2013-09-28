@@ -62,6 +62,7 @@ setup(
         'python-social-auth>=0.1.13',
     ],
     data_files=data_files,
+    include_package_data=False,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',

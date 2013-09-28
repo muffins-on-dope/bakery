@@ -77,7 +77,7 @@ def get_repo_from_url(url, gh_setup=github_setup):
     elif 'https://github.com/' in url:
         identifier = 'https://github.com'
     else:
-        raise InvalidRepositoryError('{0} is not a valid GitHub URL')
+        raise InvalidRepositoryError('{0} is not a valid GitHub URL'.format(url))
     index = url.index(identifier)
     length = len(identifier)
     start = length + index + 1  # +1 for separator after identifier

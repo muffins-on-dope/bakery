@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import httpretty
+
 from django.core.exceptions import ImproperlyConfigured
 from django.test.utils import override_settings
 from django.utils.unittest import TestCase
 
-from bakery.utils.vcs.gh import _github_setup
+from bakery.utils.test import read
+from bakery.utils.vcs.gh import _github_setup, get_repo_from_url
 
 
 class TestGithub(TestCase):
@@ -32,3 +35,30 @@ class TestGithub(TestCase):
     @override_settings(GITHUB_CREDENTIALS={'client_secret': 'foo'})
     def test_github_credentials_missing_client_id(self):
         self.assertRaises(ImproperlyConfigured, _github_setup)
+
+    @httpretty.activate
+    def test_get_repo_ssh_url(self):
+        httpretty.register_uri(httpretty.GET,
+            'https://api.github.com/repos/muffins-on-dope/bakery',
+            body=read(__file__, 'replay_data', 'github--repository'),
+            content_type='application/json; charset=utf-8'
+        )
+        get_repo_from_url('git@github.com:muffins-on-dope/bakery')
+
+    @httpretty.activate
+    def test_get_repo_ssh_url_git(self):
+        httpretty.register_uri(httpretty.GET,
+            'https://api.github.com/repos/muffins-on-dope/bakery',
+            body=read(__file__, 'replay_data', 'github--repository'),
+            content_type='application/json; charset=utf-8'
+        )
+        get_repo_from_url('git@github.com:muffins-on-dope/bakery.git')
+
+    @httpretty.activate
+    def test_get_repo_https_url(self):
+        httpretty.register_uri(httpretty.GET,
+            'https://api.github.com/repos/muffins-on-dope/bakery',
+            body=read(__file__, 'replay_data', 'github--repository'),
+            content_type='application/json; charset=utf-8'
+        )
+        get_repo_from_url('https://github.com/muffins-on-dope/bakery')

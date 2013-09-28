@@ -32,49 +32,32 @@
                                 </nav>
                             </div>
                         </div>
+
+                        <div class="controls col-md-4">
+                             <a class="btn btn-primary" id="github-login" href="#"
+                               title="Sign in with Github">
+                                Github
+                            </a>
+
+                            <a class="btn btn-primary persona-button orange" id="persona-login"
+                               href="javascript:persona_login()"
+                               title="Sign in with Persona">
+                                <span>Persona</span>
+                            </a>
+
+                            <!-- Define a form to send the POST data -->
+                            <form method="post" action="/complete/persona/" id="persona-login-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="assertion" id="persona-assertion" value="">
+                            </form>
+
                     </div>
                 </div>
             </div>
         </div>
-        <div class="controls">
-            <a class="btn btn-primary" id="github-login" href="#"
-               title="Sign in with Github">
-                Github
-            </a>
-
-            <a class="btn btn-primary persona-button orange" id="persona-login"
-               href="javascript:persona_login()"
-               title="Sign in with Persona">
-                <span>Persona</span>
-            </a>
-
-            <!-- Define a form to send the POST data -->
-            <form method="post" action="/complete/persona/" id="persona-login-form">
-                {% csrf_token %}
-                <input type="hidden" name="assertion" id="persona-assertion" value="">
-            </form>
-        </div>
         {% block content %}{% endblock content %}
      </div>
     </div>
-
-
-    <div id="footer">
-      <div class="container">
-        <nav class="col-md-12" role="navigation">
-            <a class="logo col-md-1" href="/">
-                <img src="{% static 'img/logo.svg' %}" height="45" class="img" />
-            </a>
-
-            <ul class="nav nav-pills">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Documentation</a></li>
-                {% block footer_nav %}{% endblock footer_nav %}
-            </ul>
-        </nav>
-    </div>
-    </div>
-
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'js/vendor/jquery.min.js' %}" type="application/javascript"></script>

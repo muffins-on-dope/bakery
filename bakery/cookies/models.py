@@ -14,8 +14,8 @@ class Cookie(models.Model):
         on_delete=models.CASCADE)
     description = models.TextField(_('Description'), default='')
     license = models.CharField(_('License'), max_length=50, default='')
-    last_change = models.DateTimeField(_('Last change'))
-    last_post = models.DateTimeField(_('Last poll'))
+    last_change = models.DateTimeField(_('Last change'), null=True)
+    last_poll = models.DateTimeField(_('Last poll'), null=True)
     mapping = JSONField()
 
     class Meta:

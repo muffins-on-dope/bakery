@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from bakery.settings.base import *
 
 DEBUG = True

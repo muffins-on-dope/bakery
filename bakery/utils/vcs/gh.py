@@ -81,10 +81,17 @@ def get_repo_from_url(url, gh_setup=github_setup):
     index = url.index(identifier)
     length = len(identifier)
     start = length + index + 1  # +1 for separator after identifier
-    path = url[start:]
-    if path.endswith('.git'):
-        path = path[:-4]  # strip .git
-    repository = gh_setup.get_repo(path)
+    full_name = url[start:]
+    if full_name.endswith('.git'):
+        full_name = full_name[:-4]  # strip .git
+    return get_repo_from_full_name(full_name, gh_setup)
+
+
+def get_repo_from_full_name(full_name, gh_setup=github_setup):
+    """
+    Returns a PyGithub.Repository by a given full_name (<user>/<repo_name>)
+    """
+    repository = gh_setup.get_repo(full_name)
     return repository
 
 

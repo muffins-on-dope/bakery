@@ -8,7 +8,7 @@ from jsonfield import JSONField
 
 from bakery.cookies.managers import CookieManager
 from bakery.utils.vcs.gh import (fork_repository, get_cookie_data_from_repo,
-    get_repo_from_url)
+    get_repo_from_full_name)
 
 
 class Cookie(models.Model):
@@ -52,6 +52,6 @@ class Cookie(models.Model):
     def repository(self):
         repository = getattr(self, '_repository', None)
         if not repository:
-            repository = get_repo_from_url(self.full_name)
+            repository = get_repo_from_full_name(self.full_name)
             setattr(self, '_repository', repository)
         return repository

@@ -15,7 +15,7 @@ class CookieManager(Manager):
             cookie_data = gh.get_cookie_data_from_repo(repo)
             owner_data = cookie_data.pop('_owner', None)
         else:
-            raise ValueError('{0} is not a recognized URL')
+            raise ValueError('{0} is not a recognized URL'.format(url))
 
         return self.insert_from_cookie_dict(cookie_data, owner_data, repo)
 

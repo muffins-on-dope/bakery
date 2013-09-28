@@ -1,5 +1,6 @@
 -r base.txt
 
+tox
 flake8
 coverage
 django-discover-runner==1.0

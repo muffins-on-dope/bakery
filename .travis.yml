@@ -1,16 +1,16 @@
 language: python
 
 python:
-  - "3.2"
   - "3.3"
 
 install:
   - pip install -e .
   - pip install -r requirements/test.txt
-  - pip install coveralls
 
 script:
-  - ./tests/runtests.sh
+  - coverage run manage.py test
 
 after_success:
-    coveralls
+  - coverage report
+  - pip install --quiet python-coveralls
+  - coveralls

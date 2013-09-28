@@ -2,6 +2,11 @@
 Bakery
 ======
 
+.. figure:: https://raw.github.com/muffins-on-dope/bakery/master/docs/_static/logo.jpg
+   :target: http://thenounproject.com/noun/cookie-jar/#icon-No18366
+   :align: right
+   :alt: Logo by Nikki Rodriguez
+
 .. image:: https://badge.fury.io/py/bakery.png
     :target: http://badge.fury.io/py/bakery
 

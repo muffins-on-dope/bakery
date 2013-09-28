@@ -22,6 +22,8 @@ Welcome to bakery's documentation!
 .. toctree::
    :maxdepth: 2
 
+   source/reference
+
 
 Installation
 ------------

@@ -14,15 +14,15 @@ module.exports = function(grunt) {
       },
       build: {
         files: {
-          'static/js/bakery.min.js': ['static/js/bakery.js']
+          '<%= pkg.name %>/static/js/bakery.min.js': ['<%= pkg.name %>/static/js/bakery.js']
         }
       }
     },
     jshint: {
       options: {
-        ignores: ['static/js/*.min.js']
+        ignores: ['<%= pkg.name %>/static/js/*.min.js']
       },
-      files: ['static/js/*.js'],
+      files: ['<%= pkg.name %>/static/js/*.js'],
     },
     recess: {
       dist: {
@@ -30,11 +30,11 @@ module.exports = function(grunt) {
           compile: true,
         },
         files: {
-          'static/css/vendor/bootstrap.css': [
-            'static/less/vendor/bootstrap.less'
+          '<%= pkg.name %>/static/css/vendor/bootstrap.css': [
+            '<%= pkg.name %>/static/less/vendor/bootstrap.less'
           ],
-          'static/css/<%= pkg.name %>.css': [
-            'static/less/<%= pkg.name %>.less'
+          '<%= pkg.name %>/static/css/<%= pkg.name %>.css': [
+            '<%= pkg.name %>/static/less/<%= pkg.name %>.less'
           ],
         }
       },
@@ -44,11 +44,11 @@ module.exports = function(grunt) {
           compress: true,
         },
         files: {
-          'static/css/vendor/bootstrap.min.css': [
-            'static/less/vendor/bootstrap.less'
+          '<%= pkg.name %>/static/css/vendor/bootstrap.min.css': [
+            '<%= pkg.name %>/static/less/vendor/bootstrap.less'
           ],
-          'static/css/<%= pkg.name %>.min.css': [
-            'static/less/<%= pkg.name %>.less'
+          '<%= pkg.name %>/static/css/<%= pkg.name %>.min.css': [
+            '<%= pkg.name %>/static/less/<%= pkg.name %>.less'
           ],
         }
       }

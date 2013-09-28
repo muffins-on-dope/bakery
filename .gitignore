@@ -9,6 +9,7 @@ dist
 node_modules
 media
 static-collected
+node_nodules
 
 !.coveragerc
 !.gitignore

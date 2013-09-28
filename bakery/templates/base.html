@@ -2,65 +2,64 @@
 {% load i18n %}
 {% load static from staticfiles %}
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Bakery &ndash; Cookiecutter Index</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {# TODO: only in debug build #}
     <link rel="stylesheet/less" type="text/css" href="{% static 'less/bakery.less' %}" />
-  </head>
-  <body data-spy="scroll" data-target="#bakery_navbar">
+</head>
+<body data-spy="scroll" data-target="#bakery_navbar">
     <div id="wrap">
-      <div class="container">
-        <div class="page-header">
-          <nav role="navigation" class="navbar navbar-fixed-top" id="bakery_navbar">
-            <div class="navbar-header">
-                <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/"><img src="{% static 'img/logo.svg' %}" height="40" class="img"></a>
+        <div class="container">
+            <div class="page-header">
+            <nav role="navigation" class="navbar navbar-fixed-top" id="bakery_navbar">
+                <div class="navbar-header">
+                    <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img src="{% static 'img/logo.svg' %}" height="40" class="img"></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bakery_navbar_nav">
+                    <ul class="nav navbar-nav">
+                      <li><a href="#">About</a></li>
+                      <li><a href="#">Documentation</a></li>
+                      {% block header_nav %}{% endblock header_nav %}
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="btn btn-default color2" id="github-login" href="#"
+                                title="Sign in with Github">
+                                Github
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="btn btn-default color2" id="persona-login"
+                            href="javascript:persona_login()"
+                            title="Sign in with Persona">
+                            Persona
+                            </a>
+
+                            <!-- Define a form to send the POST data -->
+                            <form method="post" action="/complete/persona/" id="persona-login-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="assertion" id="persona-assertion" value="">
+                            </form>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+            {% block content %}{% endblock content %}
             </div>
-
-            <div class="collapse navbar-collapse" id="bakery_navbar_nav">
-                <ul class="nav navbar-nav">
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Documentation</a></li>
-                  {% block header_nav %}{% endblock header_nav %}
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                  <li>
-                    <a class="btn btn-default color2" id="github-login" href="#"
-                       title="Sign in with Github">
-                        Github
-                    </a>
-                  </li>
-
-                  <li>
-                    <a class="btn btn-default color2" id="persona-login"
-                       href="javascript:persona_login()"
-                       title="Sign in with Persona">
-                        Persona
-                    </a>
-
-                    <!-- Define a form to send the POST data -->
-                    <form method="post" action="/complete/persona/" id="persona-login-form">
-                        {% csrf_token %}
-                        <input type="hidden" name="assertion" id="persona-assertion" value="">
-                    </form>
-                  </li>
-
-                </ul>
-
-            </div>
-        </nav>
-        {% block content %}{% endblock content %}
-     </div>
-    </div>
+        </div>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -88,5 +87,5 @@
       }
     </script>
 
-  </body>
+</body>
 </html>

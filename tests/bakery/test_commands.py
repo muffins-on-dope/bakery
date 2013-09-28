@@ -55,7 +55,28 @@ class TestCommands(TestCase):
         management.call_command('importcookie', 'https://github.com/audreyr/cookiecutter-pypackage', stdout=out)
         self.assertIn('Imported https://github.com/audreyr/cookiecutter-pypackage', out.getvalue())
 
+    @httpretty.activate
     def test_importcookie_verbose(self):
+        httpretty.register_uri(httpretty.GET,
+            'https://api.github.com/repos/audreyr/cookiecutter-pypackage',
+            body=read(__file__, 'replay_data', 'repository'),
+            content_type='application/json; charset=utf-8'
+        )
+        httpretty.register_uri(httpretty.GET,
+            'https://api.github.com/users/audreyr',
+            body=read(__file__, 'replay_data', 'owner'),
+            content_type='application/json; charset=utf-8'
+        )
+        httpretty.register_uri(httpretty.GET,
+            'https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/',
+            body=read(__file__, 'replay_data', 'root_dir'),
+            content_type='application/json; charset=utf-8'
+        )
+        httpretty.register_uri(httpretty.GET,
+            'https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/cookiecutter.json',
+            body=read(__file__, 'replay_data', 'cookiecutter.json'),
+            content_type='application/json; charset=utf-8'
+        )
         out = StringIO()
         management.call_command('importcookie', 'https://github.com/audreyr/cookiecutter-pypackage', verbosity=2, stdout=out)
         self.assertIn('Importing https://github.com/audreyr/cookiecutter-pypackage', out.getvalue())

@@ -2,6 +2,7 @@
 
 from django.contrib.auth.models import BaseUserManager
 
+
 class BakeryUserManager(BaseUserManager):
 
     def _create_user(self, username, password, email, name, is_staff,
@@ -28,9 +29,9 @@ class BakeryUserManager(BaseUserManager):
         return user
 
     def create_user(self, username, password=None, **extra_fields):
-        return self._create_user(username, password, None, None, False,
-            **extra_fields)
+        return self._create_user(username, password, None, None, False, False,
+            '', **extra_fields)
 
     def create_superuser(self, username, password, **extra_fields):
-        return self._create_user(username, password, None, None, True,
-            **extra_fields)
+        return self._create_user(username, password, None, None, True, False,
+            '', **extra_fields)

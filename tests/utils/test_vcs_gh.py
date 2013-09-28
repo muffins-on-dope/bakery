@@ -6,6 +6,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.test.utils import override_settings
 from django.utils.unittest import TestCase
 
+from bakery.cookies.exceptions import InvalidRepositoryError
 from bakery.utils.test import read
 from bakery.utils.vcs.gh import _github_setup, get_repo_from_url
 
@@ -43,7 +44,8 @@ class TestGithub(TestCase):
             body=read(__file__, 'replay_data', 'github--repository'),
             content_type='application/json; charset=utf-8'
         )
-        get_repo_from_url('git@github.com:muffins-on-dope/bakery')
+        repo = get_repo_from_url('git@github.com:muffins-on-dope/bakery')
+        self.assertEqual(repo.full_name, 'muffins-on-dope/bakery')
 
     @httpretty.activate
     def test_get_repo_ssh_url_git(self):
@@ -52,7 +54,8 @@ class TestGithub(TestCase):
             body=read(__file__, 'replay_data', 'github--repository'),
             content_type='application/json; charset=utf-8'
         )
-        get_repo_from_url('git@github.com:muffins-on-dope/bakery.git')
+        repo = get_repo_from_url('git@github.com:muffins-on-dope/bakery.git')
+        self.assertEqual(repo.full_name, 'muffins-on-dope/bakery')
 
     @httpretty.activate
     def test_get_repo_https_url(self):
@@ -61,4 +64,9 @@ class TestGithub(TestCase):
             body=read(__file__, 'replay_data', 'github--repository'),
             content_type='application/json; charset=utf-8'
         )
-        get_repo_from_url('https://github.com/muffins-on-dope/bakery')
+        repo = get_repo_from_url('https://github.com/muffins-on-dope/bakery')
+        self.assertEqual(repo.full_name, 'muffins-on-dope/bakery')
+
+    def test_get_repo_invalid_url(self):
+        self.assertRaises(InvalidRepositoryError,
+            get_repo_from_url, 'https://example.com/')

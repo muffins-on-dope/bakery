@@ -17,9 +17,9 @@ class CookieManager(Manager):
         else:
             raise ValueError('{0} is not a recognized URL')
 
-        return self.insert_from_cookie_dict(cookie_data, owner_data)
+        return self.insert_from_cookie_dict(cookie_data, owner_data, repo)
 
-    def insert_from_cookie_dict(self, cookie_dict, owner_dict):
+    def insert_from_cookie_dict(self, cookie_dict, owner_dict, repo=None):
         owner, created = BakeryUser.objects.get_or_create(**owner_dict)
         if created:
             owner.set_unusable_password()
@@ -28,4 +28,6 @@ class CookieManager(Manager):
 
         cookie = self.model(**cookie_dict)
         cookie.save()
+        if repo:
+            setattr(cookie, '_repository', repo)
         return cookie

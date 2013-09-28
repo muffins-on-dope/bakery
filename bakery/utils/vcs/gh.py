@@ -82,11 +82,9 @@ def get_repo_from_url(url, gh_setup=github_setup):
     length = len(identifier)
     start = length + index + 1  # +1 for separator after identifier
     path = url[start:]
-    username, repo = path.split('/', 1)
-    if repo.endswith('.git'):
-        repo = repo[:-4]  # strip .git
-    user = gh_setup.get_user(username)
-    repository = user.get_repo(repo)
+    if path.endswith('.git'):
+        path = path[:-4]  # strip .git
+    repository = gh_setup.get_repo(path)
     return repository
 
 
@@ -98,9 +96,11 @@ def get_cookie_data_from_repo(repo):
     * ``name`` -- Repository name
     * ``url`` -- The HTTP URL to view the repository in a browser
     * ``description`` -- A brief description about the repository
+    * ``owner_name`` -- The owner name of the repository
     * ``last_change`` -- A timezone aware timestamp of the last modification
       on the repository
     * ``mapping`` -- The content of the ``cookiecutter.json`` file (or similar)
+    * ``backend`` -- 'github'
     * _``owner`` -- A dict with information about the owner of the repository
 
       * ``username`` -- The user- or login name (required)
@@ -129,10 +129,12 @@ def get_cookie_data_from_repo(repo):
     }
     data = {
         'name': repo.name,
+        'owner_name': repo.owner.login,
         'url': repo.html_url,
         'description': repo.description,
         'last_change': make_aware(repo.updated_at, pytz.UTC),
         'mapping': content,
+        'backend': 'github',
         '_owner': owner_data,
     }
     return data
@@ -198,3 +200,12 @@ def get_content_from_content_file(content_file):
             'Encoding {0} cannot be decoded'.format(content_file.encoding))
     mapping_data = json.loads(decoded)
     return mapping_data
+
+
+def fork_repository(user, repo):
+    """
+    Forks the repository ``repo`` to the user ``user``.
+
+    :return: Returns an instance of the newly forked ``PyGithub.Repository``.
+    """
+    return user.create_fork(repo)

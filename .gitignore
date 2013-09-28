@@ -6,10 +6,9 @@ coverage.xml
 build
 dist
 
-node_modules
 media
+node_modules
 static-collected
-node_nodules
 
 !.coveragerc
 !.gitignore

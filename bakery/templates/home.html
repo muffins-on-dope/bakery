@@ -8,6 +8,8 @@
         <td class="name">{{ cookie.name }}</td>
         <td class="description">{{ cookie.short_description }}</td>
         <td class="badges">
+            <span class="badge color3b">{{ cookie.language }}</span>
+
             {% if cookie.activity == 0 %}
             <span class="badge color1a">ancient</span>
             {% elif cookie.activity == 1 %}

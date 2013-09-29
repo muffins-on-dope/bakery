@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser
 
 from bakery.auth.managers import BakeryUserManager
-from bakery.socialize.models import Vote
+from bakery.socialize.models import do_vote
 
 
 class BakeryUser(AbstractBaseUser):
@@ -44,5 +44,4 @@ class BakeryUser(AbstractBaseUser):
         return self.name
 
     def vote_for_cookie(self, cookie):
-        if not Vote.objects.has_voted(self, cookie):
-            Vote.objects.create(user=self, cookie=cookie)
+        do_vote(self, cookie)

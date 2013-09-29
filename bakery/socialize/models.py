@@ -1,8 +1,25 @@
 # -*- coding: utf-8 -*-
 
-from django.db import models
+import random
+
+from django.db import models, transaction
+from django.utils.translation import ugettext_lazy as _
 
 from bakery.socialize.managers import VoteManager
+
+
+def do_vote(user, cookie):
+    assert user and cookie
+    if not Vote.objects.has_voted(user, cookie):
+        with transaction.commit_on_success():
+            vote = Vote.objects.create(cookie=cookie, user=user)
+            candy_type = random.choice(CANDIES)
+            Candy.objects.create(candy_type=candy_type[0], user=user, vote=vote)
+
+
+def do_unvote(user, cookie):
+    assert user and cookie
+    Vote.objects.get_for_user_and_cookie(user, cookie).delete()
 
 
 class Vote(models.Model):

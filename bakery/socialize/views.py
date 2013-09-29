@@ -8,15 +8,19 @@ from django.views.generic import DetailView
 
 from bakery.auth.models import BakeryUser
 from bakery.cookies.models import Cookie
+from bakery.socialize.models import do_vote, do_unvote
 
 
 @login_required
 @require_POST
-def vote(request):
+def vote(request, unvote=False):
     cookie_id = int(request.POST.get('c'))
     try:
         cookie = Cookie.objects.get(pk=cookie_id)
-        request.user.vote_for_cookie(cookie)
+        if unvote:
+            do_unvote(request.user, cookie)
+        else:
+            do_vote(request.user, cookie)
         redirect = reverse('cookies:detail', kwargs={
             'owner_name': cookie.owner_name,
             'name': cookie.name,

@@ -37,7 +37,7 @@ Installation
     $ pip install -r requirements/development.txt
 
     $ # run tests
-    $ python manage.py test
+    $ python manage.py test --settings=bakery.settings.test
 
 
 Setup PostgreSQL

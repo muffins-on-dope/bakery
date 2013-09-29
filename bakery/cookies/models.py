@@ -116,3 +116,7 @@ class Cookie(models.Model):
                                         indent=4, sort_keys=True)
             setattr(self, '_mapping_pretty', mapping_pretty)
         return mapping_pretty
+
+    @property
+    def clone_urls_tuple(self):
+        return sorted(tuple(self.clone_urls.items()))

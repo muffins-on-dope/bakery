@@ -71,7 +71,30 @@
       {% endif %}
     </div>
     <div class="col-md-10">
-      <pre>{{ object.mapping_pretty }}</pre>
+      <div class="row">
+        <div class="col-md-12">
+          <strong>{% trans "cookiecutter file" %}</strong>
+          <hr>
+          <pre>{{ object.mapping_pretty }}</pre>
+          <br><br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <strong>{% trans "Clone URLs" %}</strong>
+          <hr>
+          <table>
+            <tbody>
+              {% for key, value in object.clone_urls.items %}
+                <tr>
+                  <td>{{ key }}:</td>
+                  <td>{{ value }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

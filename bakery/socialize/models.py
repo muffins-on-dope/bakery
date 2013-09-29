@@ -46,8 +46,6 @@ CANDIES = (
     ('cookie', _('Cookie'), '&#x1f36a;'),
 )
 CANDY_CHOICES = ((candy[0], candy[1]) for candy in CANDIES)
-CANDY_LABELS = dict(CANDY_CHOICES)
-CANDY_PICTOGRAM = dict((candy[0], candy[2]) for candy in CANDIES)
 
 
 class Candy(models.Model):

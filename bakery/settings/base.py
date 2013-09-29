@@ -165,6 +165,8 @@ AUTH_USER_MODEL = 'auth.BakeryUser'
 #: * client_secret
 GITHUB_CREDENTIALS = None
 
+# Social Auth
+
 SOCIAL_AUTH_AUTHENTICATION_BACKENDS = AUTHENTICATION_BACKENDS = (
     'social.backends.persona.PersonaAuth',
     'social.backends.github.GithubOAuth2',
@@ -174,7 +176,8 @@ SOCIAL_AUTH_AUTHENTICATION_BACKENDS = AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_GITHUB_KEY = ''
 SOCIAL_AUTH_GITHUB_SECRET = ''
-#SOCIAL_AUTH_GITHUB_SCOPE = []
+
+SOCIAL_AUTH_GITHUB_SCOPE = ['public_repo']
 
 
 LOGIN_URL = '/'

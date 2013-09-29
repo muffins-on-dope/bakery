@@ -33,6 +33,7 @@ Installation
 
     $ # Activate Environment and install
     $ source env/bin/activate
+    $ cd bakery
     $ pip install -r requirements/development.txt
 
     $ # run tests

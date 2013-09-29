@@ -3,11 +3,14 @@
 {% block content %}
 <div class="cookie-detail">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <ol class="breadcrumb">
-                <li><a href="#">{{ object.owner_name}}</a></li><!-- TODO: Fix link -->
-                <li class="active">{{ object.name }}</li>
-            </ol>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 breadcrumb">
+            <span><a href="#">{{ object.owner_name}}</a></span><!-- TODO: Fix link -->
+            <span class="active">{{ object.name }}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 description">
+            {{ object.description }}
         </div>
     </div>
 </div>

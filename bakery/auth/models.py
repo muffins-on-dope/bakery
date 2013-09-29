@@ -7,6 +7,7 @@ from django.contrib.auth.models import AbstractBaseUser
 
 from bakery.auth.managers import BakeryUserManager
 from bakery.socialize.models import do_vote
+from bakery.utils.gravatar import get_gravatar
 
 
 class BakeryUser(AbstractBaseUser):
@@ -42,6 +43,9 @@ class BakeryUser(AbstractBaseUser):
     def get_short_name(self):
         "Returns the short name for the user."
         return self.name
+
+    def get_gravatar(self):
+        return get_gravatar(self.email)
 
     def vote_for_cookie(self, cookie):
         do_vote(self, cookie)

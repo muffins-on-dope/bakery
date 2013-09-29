@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+
+{% block head_title %}Profile for {{ bakery_user.username }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+      <div class="col-md-10">
+          <div class="page-header">
+            <a href="{{ bakery_user.get_absolute_url }}" class="pull-right">
+              <img class="img-circle img-responsive" src="{{ bakery_user.get_gravatar }}">
+            </a>
+            <h3>{{ bakery_user.username }}</h3>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <strong>Joined</strong>
+      <hr><small>{{ bakery_user.date_joined|date }}</small>
+      <br><br>
+      <strong>Stats</strong>
+      <hr />
+      <table>
+          <tbody>
+              <tr>
+                  <td><small>Cookies</small>
+                  </td>
+                  <td><span class="badge">{{ bakery_user.cookie_set.count }}</span>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+    <div class="col-md-10">
+      <h3>{% trans "Cookies" %}</h3>
+      <ul class="nav">
+      {% if bakery_user.cookie_set.exists %}
+       {% for cookie in bakery_user.cookie_set.all %}
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 name">
+               <strong>{{ cookie.name }}</strong>
+            </div>
+            <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6 description">
+                {{ cookie.short_description }}
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 badges">
+                <span class="badge color3b">{{ cookie.language }}</span>
+                <div class="hidden-xs hidden-sm actions">
+                    {% if request.user.is_authenticated %}
+                        {% if cookie.pk in voted_cookie_ids %}
+                            <form action="{% url 'socialize:unvote' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="c" value="{{ cookie.id }}">
+                                <input type="submit" value="&#x1f36a;" title="Vote" class="btn btn-xs btn-primary">
+                            </form>
+                        {% else %}
+                            <form action="{% url 'socialize:vote' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="c" value="{{ cookie.id }}">
+                                <input type="submit" value="&#x1f36a;" title="Vote" class="btn btn-xs btn-default">
+                            </form>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+      {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

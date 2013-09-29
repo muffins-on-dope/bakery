@@ -1,22 +1,69 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% block head_title %}Cookie {{ object.full_name }}{% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-md-10 breadcrumb">
-            <h3><a href="{{ object.owner.get_absolute_url }}">{{ object.owner_name }}</a></h3><!-- TODO: Fix link -->
-            <h1>{{ object.name }}</h2>
-        </div>
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right url">
-            <a href="{{ object.url }}">View on {{ object.backend }}</a>
-        </div>
+  <div class="row">
+    <div class="col-md-10 breadcrumb">
+      <h4><a href="{{ object.owner.get_absolute_url }}">{{ object.owner_name }}</a></h4>
+      <h3>{{ object.name }}</h3>
     </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 description">
-            {{ object.description|urlize }}
-        </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10">
+      {{ object.description|urlize }}
     </div>
+    <div class="col-md-2 text-right">
+      <a href="{{ object.url }}">View on {{ object.backend }}</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <strong>{% trans "Last commit" %}</strong>
+      <hr><small>{{ object.last_change|date:"DATETIME_FORMAT" }}</small>
+      <br><br>
+      {% if object.last_poll %}
+        <strong>{% trans "Last poll" %}</strong>
+        <hr><small>{{ object.last_poll|date:"DATETIME_FORMAT" }}</small>
+        <br><br>
+      {% endif %}
+      {% if object.license %}
+        <strong>{% trans "License" %}</strong>
+        <hr><small>{{ object.license }}</small>
+        <br><br>
+      {% endif %}
+      {% if object.language %}
+        <strong>{% trans "Language" %}</strong>
+        <hr><small>{{ object.language }}</small>
+        <br><br>
+      {% endif %}
+      <strong>{% trans "Stats" %}</strong>
+      <hr />
+      <table>
+        <tbody>
+          <tr>
+            <td><small>Watchers</small></td>
+            <td><span class="badge">{{ object.repo_watchers }}</span></td>
+          </tr>
+          <tr>
+            <td><small>Forks</small></td>
+            <td><span class="badge">{{ object.repo_forks }}</span></td>
+          </tr>
+          <tr>
+            <td><small>Votes</small></td>
+            <td><span class="badge">{{ object.votes.count }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+      {% if object.homepage %}
+        <strong>{% trans "Homepage" %}</strong>
+        <hr><small>{{ object.homepage }}</small>
+        <br><br>
+      {% endif %}
+    </div>
+  </div>
 </div>
 {% endblock content %}

@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h4>Cookies</h4>
-<table class="table table-condensed cookies color1">
-    {% for cookie in object_list %}
-    <tr class="cookie">
-        <td class="name">{{ cookie.name }}</td>
-        <td class="description">{{ cookie.short_description }}</td>
-        <td class="badges">
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2>Cookies</h2>
+    </div>
+</div>
+<div class="cookies">
+{% for cookie in object_list %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 name">
+           {{ cookie.pk }} {{ cookie.name }}
+        </div>
+        <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6 description">
+            {{ cookie.short_description }}
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 badges">
             <span class="badge color3b">{{ cookie.language }}</span>
 
             {% if cookie.activity == 0 %}
@@ -17,26 +25,25 @@
             {% else %}
             <span class="badge color2b">very active</span>
             {% endif %}
-        </td>
-        {% if request.user.is_authenticated %}
-            <td>
-                {% if cookie.pk in voted_cookie_ids %}
-                    <form action="{% url 'socialize:unvote' %}" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="c" value="{{ cookie.id }}">
-                        <input type="submit" value="&#x1f36a;" title="Vote" class="btn btn-xs btn-primary">
-                    </form>
-                {% else %}
-                    <form action="{% url 'socialize:vote' %}" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="c" value="{{ cookie.id }}">
-                        <input type="submit" value="&#x1f36a;" title="Vote" class="btn btn-xs btn-default">
-                    </form>
+            <div class="hidden-xs hidden-sm actions">
+                {% if request.user.is_authenticated %}
+                    {% if cookie.pk in voted_cookie_ids %}
+                        <form action="{% url 'socialize:unvote' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="c" value="{{ cookie.id }}">
+                            <input type="submit" value="&#x1f36a;" title="Vote" class="btn btn-xs btn-primary">
+                        </form>
+                    {% else %}
+                        <form action="{% url 'socialize:vote' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="c" value="{{ cookie.id }}">
+                            <input type="submit" value="&#x1f36a;" title="Vote" class="btn btn-xs btn-default">
+                        </form>
+                    {% endif %}
                 {% endif %}
-            </td>
-        {% endif %}
-    </tr>
-    {% endfor %}
-</table>
-
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
 {% endblock content %}

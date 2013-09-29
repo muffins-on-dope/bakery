@@ -1,8 +1,9 @@
 @import "scheme.less";
-@import "vendor/bootstrap.less";
+@import "vendor/variables.less";
+@import "vendor/mixins.less";
 
 body {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: @font-family-sans-serif;
     font-size: 13px;
     line-height: 20px;
     padding-top: 50px;
@@ -37,11 +38,24 @@ html, body {
 
 
 .cookies {
+    .row:not(:last-child) {
+        margin-bottom: 1em;
+    }
     .name {
-        width: 15em;
+        font-weight: bold;
     }
     .badges {
         text-align: right;
+    }
+    @media (max-width: @screen-desktop) {
+        .actions {
+            display: none;
+        }
+    }
+    @media (min-width: @screen-desktop) {
+        .actions {
+        display: inline-block !important;
+        }
     }
 }
 

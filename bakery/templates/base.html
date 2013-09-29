@@ -9,7 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {# TODO: only in debug build #}
-    <link rel="stylesheet/less" type="text/css" href="{% static 'less/bakery.less' %}" />
+    {% if debug %}
+        <link rel="stylesheet/less" type="text/css" href="{% static 'less/vendor/bootstrap.less' %}" />
+        <link rel="stylesheet/less" type="text/css" href="{% static 'less/bakery.less' %}" />
+    {% else %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/bootstrap.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bakery.min.css' %}" />
+    {% endif %}
 </head>
 <body data-spy="scroll" data-target="#bakery_navbar">
     <div id="wrap">

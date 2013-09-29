@@ -29,7 +29,7 @@ Installation
     $ virtualenv env
 
     $ # Clone repository
-    $ git clone git@github.com:muffins-on-dope/bakery.git
+    $ git clone https://github.com/muffins-on-dope/bakery.git
 
     $ # Activate Environment and install
     $ source env/bin/activate

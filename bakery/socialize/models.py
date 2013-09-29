@@ -39,8 +39,8 @@ class Vote(models.Model):
 
 CANDIES = (
     ('rice-cracker', _('Rice Cracker'), '&#x1f358;'),
-    ('candy', _('Candy'), '&#1f36c;'),
-    ('lollipop', _('Lollipop'), '&#1f36d;'),
+    ('candy', _('Candy'), '&#x1f36c;'),
+    ('lollipop', _('Lollipop'), '&#x1f36d;'),
     ('chocolate-bar', _('Chocolate Bar'), '&#x1f36b;'),
     ('doughnut', _('Doughnut'), '&#x1f369;'),
     ('cookie', _('Cookie'), '&#x1f36a;'),

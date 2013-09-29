@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser
 
 from bakery.auth.managers import BakeryUserManager
-from bakery.socialize.models import do_vote
+from bakery.socialize.models import do_vote, CANDIES
 from bakery.utils.gravatar import get_gravatar
 
 
@@ -52,3 +52,15 @@ class BakeryUser(AbstractBaseUser):
 
     def vote_for_cookie(self, cookie):
         do_vote(self, cookie)
+
+    @property
+    def candies_list(self):
+        candies_list = getattr(self, '_candies_list', [])
+        if not candies_list:
+            candies = self.candies.order_by('candy_type')
+            for candy in CANDIES:
+                candy_type = candy[0]
+                count = candies.filter(candy_type=candy_type).count()
+                candies_list.append((candy, count))
+            setattr(self, '_candies_list', candies_list)
+        return candies_list

@@ -146,6 +146,11 @@ def get_cookie_data_from_repo(repo):
         'repo_forks': repo.forks,
         'participants': ', '.join(user.login for user in repo.get_contributors()),
         'language': repo.language,
+        'homepage': repo.homepage,
+        'clone_urls': {
+            'ssh': repo.ssh_url,
+            'git': repo.git_url,
+        },
         '_owner': owner_data,
     }
     return data

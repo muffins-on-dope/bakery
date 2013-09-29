@@ -17,8 +17,8 @@ class Cookie(models.Model):
     url = models.URLField(_('URL'), unique=True)
     owner = models.ForeignKey(get_user_model(), verbose_name=_('User'),
                               on_delete=models.CASCADE)
-    description = models.TextField(_('Description'), default='')
-    license = models.CharField(_('License'), max_length=50, default='')
+    description = models.TextField(_('Description'), blank=True)
+    license = models.CharField(_('License'), max_length=50, blank=True)
     last_change = models.DateTimeField(_('Last change'), null=True)
     last_poll = models.DateTimeField(_('Last poll'), null=True)
     backend = models.CharField(_('Backend'), max_length=25)
@@ -29,7 +29,9 @@ class Cookie(models.Model):
     repo_forks = models.IntegerField(_("repo forks"), default=0)
     participants = models.TextField(_("Participants"),
         help_text="List of collaborats/participants on the project", blank=True)
-    language = models.CharField(_('Language'), max_length=50, default='')
+    language = models.CharField(_('Language'), max_length=50, blank=True)
+    homepage = models.CharField(_('Homepage'), max_length=255, blank=True)
+    clone_urls = JSONField(default={})
 
     objects = CookieManager()
 

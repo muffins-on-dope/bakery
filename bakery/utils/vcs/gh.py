@@ -142,6 +142,10 @@ def get_cookie_data_from_repo(repo):
         'last_change': make_aware(repo.updated_at, pytz.UTC),
         'mapping': content,
         'backend': 'github',
+        'repo_watchers': repo.watchers,
+        'repo_forks': repo.forks,
+        'participants': ', '.join(user.login for user in repo.get_contributors()),
+        'language': repo.language,
         '_owner': owner_data,
     }
     return data

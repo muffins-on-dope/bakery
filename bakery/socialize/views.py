@@ -14,6 +14,7 @@ from bakery.socialize.models import do_vote, do_unvote
 @login_required
 @require_POST
 def vote(request, unvote=False):
+    next = request.GET.get('next', '')
     cookie_id = int(request.POST.get('c'))
     try:
         cookie = Cookie.objects.get(pk=cookie_id)
@@ -21,11 +22,12 @@ def vote(request, unvote=False):
             do_unvote(request.user, cookie)
         else:
             do_vote(request.user, cookie)
-        redirect = reverse('cookies:detail', kwargs={
-            'owner_name': cookie.owner_name,
-            'name': cookie.name,
-        })
-        return HttpResponseRedirect(redirect)
+        if not next:
+            next = reverse('cookies:detail', kwargs={
+                'owner_name': cookie.owner_name,
+                'name': cookie.name,
+            })
+        return HttpResponseRedirect(next)
     except Cookie.DoesNotExist:
         raise Http404('Cookie does not exist')
 

@@ -8,7 +8,7 @@
 {% block content %}
 <div class="container">
   <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-12">
           <div class="page-header">
             <a href="{{ bakery_user.get_absolute_url }}" class="pull-right">
               <img class="img-circle img-responsive" src="{{ bakery_user.get_gravatar }}">
@@ -40,7 +40,7 @@
       <ul class="nav">
       {% if bakery_user.cookie_set.exists %}
        {% for cookie in bakery_user.cookie_set.all %}
-        <div class="row">
+        <div class="row cookies">
             <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 name">
               <a href="{% url 'cookies:detail' cookie.owner_name cookie.name %}">
                 <strong>{{ cookie.name }}</strong>
@@ -54,16 +54,16 @@
                 <div class="hidden-xs hidden-sm actions">
                     {% if request.user.is_authenticated %}
                         {% if cookie.pk in voted_cookie_ids %}
-                            <form action="{% url 'socialize:unvote' %}" method="POST">
+                            <form action="{% url 'socialize:unvote' %}?next={{ request.get_full_path }}" method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="c" value="{{ cookie.id }}">
-                                <input type="submit" value="&#x1f36a;" title="Vote" class="btn btn-xs btn-primary">
+                                <input type="submit" value="" title="Vote" class="btn btn-xs btn-primary btn-cookie">
                             </form>
                         {% else %}
-                            <form action="{% url 'socialize:vote' %}" method="POST">
+                            <form action="{% url 'socialize:vote' %}?next={{ request.get_full_path }}" method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="c" value="{{ cookie.id }}">
-                                <input type="submit" value="&#x1f36a;" title="Vote" class="btn btn-xs btn-default">
+                                <input type="submit" value="" title="Vote" class="btn btn-xs btn-default btn-cookie">
                             </form>
                         {% endif %}
                     {% endif %}

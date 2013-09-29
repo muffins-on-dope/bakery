@@ -60,7 +60,10 @@ class Cookie(models.Model):
 
     @property
     def short_description(self):
-        return _punctuation.split(self.description)[0]
+        descr = self.mapping.get('project_short_description', None)
+        if descr is None:
+            descr = self.description
+        return _punctuation.split(descr)[0]
 
     @property
     def activity(self):

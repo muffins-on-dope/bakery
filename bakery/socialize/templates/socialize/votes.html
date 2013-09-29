@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h4>Votes for {{ object }}</h4>
+<table class="table table-condensed cookies color1">
+    {% for user in users %}
+    <tr class="cookie">
+        <td class="username">{{ user.username }}</td>
+        <td class="name">{{ user.name }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

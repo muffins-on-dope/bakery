@@ -222,7 +222,7 @@ def get_content_from_content_file(content_file):
     :raises: ``InvalidContentFileEncoding`` raised if not suitable decoding
         is defined.
     """
-    return decode_file(json.loads(decoded))
+    return json.loads(decode_file(content_file))
 
 
 def fork_repository(user, repo):

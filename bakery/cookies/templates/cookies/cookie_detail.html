@@ -58,6 +58,7 @@
           </tr>
         </tbody>
       </table>
+      <br>
       {% if object.homepage %}
         <strong>{% trans "Homepage" %}</strong>
         <hr><small>{{ object.homepage }}</small>
@@ -71,7 +72,7 @@
     </div>
     <div class="col-md-10">
       <pre>{{ object.mapping_pretty }}</pre>
-    <div>
+    </div>
   </div>
 </div>
 {% endblock content %}

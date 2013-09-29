@@ -164,7 +164,7 @@ AUTH_USER_MODEL = 'auth.BakeryUser'
 
 # Social Auth
 SOCIAL_AUTH_AUTHENTICATION_BACKENDS = AUTHENTICATION_BACKENDS = (
-    'social.backends.persona.PersonaAuth',
+    #'social.backends.persona.PersonaAuth',
     'social.backends.github.GithubOAuth2',
     #    'social.backends.bitbucket.BitbucketOAuth',
     'django.contrib.auth.backends.ModelBackend',

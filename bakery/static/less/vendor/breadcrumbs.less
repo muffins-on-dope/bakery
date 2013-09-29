@@ -7,15 +7,15 @@
   padding: 8px 15px;
   margin-bottom: @line-height-computed;
   list-style: none;
-  background-color: @breadcrumb-bg;
-  border-radius: @border-radius-base;
-  > li {
+  > li,
+  > span {
     display: inline-block;
     font-size: 2em;
     a {
       color: @breadcrumb-color;
     }
-    &+li:before {
+    &+li:before,
+    &+span:before {
       content: "/\00a0"; // Unicode space added since inline-block means non-collapsing white-space
       padding: 0 5px;
       color: @breadcrumb-color;

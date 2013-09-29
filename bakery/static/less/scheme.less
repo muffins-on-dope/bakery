@@ -1,25 +1,4 @@
-// This color is used to generate the scheme
-@seed-color: #CA6304;
-
-//// Color wheel positions
-///////////////////////////
-
-// Uncomment the color wheel you want to use
-
-// Accented analogue (default)
-@wheel_pos1:45; @wheel_pos2:315; @wheel_pos3:180;
-
-// Tetrad
-// @wheel_pos1:30; @wheel_pos2:180; @wheel_pos3:210;
-
-// Triad
-// @wheel_pos1:120; @wheel_pos2:240; @wheel_pos3:0;
-
-// Compliment
-// @wheel_pos1:180; @wheel_pos2:0; @wheel_pos3:180;
-
-// Monochrome
-// @wheel_pos1:8; @wheel_pos2:352; @wheel_pos3:0;
+@seed-color: #B28059;
 
 //// Luma breaks
 ///////////////////////////
@@ -67,27 +46,38 @@
 @color1:@seed-color;
 @color1theme:hsl(hue(spin(@seed-color,0)),@sat,@l-factor); // a color 1 alternate, to keep a, b and c colors consistent
 
-@color1a:lighten(saturate(@color1theme,@color-a-sat), @color-a-lit);
-@color1b:lighten(saturate(@color1theme,@color-b-sat), @color-b-lit);
-@color1c:lighten(saturate(@color1theme,@color-c-sat), @color-c-lit);
 
-@color2:hsl(hue(spin(@seed-color,@wheel_pos1)),@sat,@l-factor);
+///////////////////////////
+//// Our own style
+///////////////////////////
 
-@color2a:lighten(saturate(@color2,@color-a-sat), @color-a-lit);
-@color2b:lighten(saturate(@color2,@color-b-sat), @color-b-lit);
-@color2c:lighten(saturate(@color2,@color-c-sat), @color-c-lit);
+@color1: #ffefe3;
 
-@color3:hsl(hue(spin(@seed-color,@wheel_pos2)),@sat,@l-factor);
+@color1a: lighten(saturate(@color1theme,@color-a-sat), @color-a-lit);
+@color1b: lighten(saturate(@color1theme,@color-b-sat), @color-b-lit);
+@color1c: lighten(saturate(@color1theme,@color-c-sat), @color-c-lit);
 
-@color3a:lighten(saturate(@color3,@color-a-sat), @color-a-lit);
-@color3b:lighten(saturate(@color3,@color-b-sat), @color-b-lit);
-@color3c:lighten(saturate(@color3,@color-c-sat), @color-c-lit);
+@color2: #FFC598;
 
-@color4:hsl(hue(spin(@seed-color,@wheel_pos3)),@sat,@l-factor);
+@color2a: lighten(saturate(@color2,@color-a-sat), @color-a-lit);
+@color2b: lighten(saturate(@color2,@color-b-sat), @color-b-lit);
+@color2c: lighten(saturate(@color2,@color-c-sat), @color-c-lit);
 
-@color4a:lighten(saturate(@color4,@color-a-sat), @color-a-lit);
-@color4b:lighten(saturate(@color4,@color-b-sat), @color-b-lit);
-@color4c:lighten(saturate(@color4,@color-c-sat), @color-c-lit);
+@color3: #47A5B2;
+
+@color3a: lighten(saturate(@color3,@color-a-sat), @color-a-lit);
+@color3b: lighten(saturate(@color3,@color-b-sat), @color-b-lit);
+@color3c: lighten(saturate(@color3,@color-c-sat), @color-c-lit);
+
+// We only use 3 major colors.
+
+@color4: @color3;
+
+@color4a: lighten(saturate(@color4,@color-a-sat), @color-a-lit);
+@color4b: lighten(saturate(@color4,@color-b-sat), @color-b-lit);
+@color4c: lighten(saturate(@color4,@color-c-sat), @color-c-lit);
+
+@beige: #ffefe3;
 
 ///////////////////////////
 //// Mix-ins

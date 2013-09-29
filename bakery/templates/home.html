@@ -3,7 +3,7 @@
 {% block content %}
 <h4>Cookies</h4>
 <table class="table table-condensed cookies color1">
-    {% for cookie in cookies %}
+    {% for cookie in object_list %}
     <tr class="cookie">
         <td class="name">{{ cookie.name }}</td>
         <td class="description">{{ cookie.short_description }}</td>

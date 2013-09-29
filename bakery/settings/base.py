@@ -161,15 +161,7 @@ LOGGING = {
 
 AUTH_USER_MODEL = 'auth.BakeryUser'
 
-#: A dict for Github authentiaction accepting following keys:
-#: * login_or_token
-#: * password
-#: * client_id
-#: * client_secret
-GITHUB_CREDENTIALS = None
-
 # Social Auth
-
 SOCIAL_AUTH_AUTHENTICATION_BACKENDS = AUTHENTICATION_BACKENDS = (
     'social.backends.persona.PersonaAuth',
     'social.backends.github.GithubOAuth2',
@@ -198,7 +190,6 @@ SOCIAL_AUTH_LOGIN_ERROR_URL = LOGIN_ERROR_URL
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
 
-
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
     'social.pipeline.social_auth.social_uid',
@@ -211,3 +202,10 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.associate_user',
     'social.pipeline.user.user_details'
 )
+
+#: A dict for Github authentiaction accepting following keys:
+#: * login_or_token
+#: * password
+#: * client_id
+#: * client_secret
+GITHUB_CREDENTIALS = None

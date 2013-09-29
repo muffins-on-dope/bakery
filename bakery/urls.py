@@ -9,12 +9,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'bakery.views.home', name='home'),
-    url(r'^logout/$', 'bakery.views.logout', name='logout'),
     url(r'^styles/$', 'bakery.views.styles', name='styles'),
-    url(r'^login-error/$', 'bakery.views.login_error', name='login_error'),
 
-    url(r'^profile/(?P<username>.*?)/$', 'bakery.views.profile', name='profile'),
-
+    url(r'^', include('bakery.auth.urls', namespace='auth')),
     url(r'^', include('bakery.cookies.urls', namespace='cookies')),
     url(r'^', include('bakery.socialize.urls', namespace='socialize')),
     url('api/v1/', include('bakery.api.urls', namespace='api')),

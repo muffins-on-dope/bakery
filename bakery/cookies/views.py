@@ -12,6 +12,7 @@ from django.views.generic import DetailView
 from github import Github, GithubException
 
 from bakery.cookies.models import Cookie
+from bakery.socialize.models import Vote
 from bakery.utils.vcs.gh import fork_repository
 
 
@@ -21,7 +22,13 @@ class CookieDetailView(DetailView):
     def get_object(self):
         owner_name = self.kwargs['owner_name']
         name = self.kwargs['name']
-        return get_object_or_404(Cookie, owner_name=owner_name, name=name)
+        self.object = get_object_or_404(Cookie, owner_name=owner_name, name=name)
+        return self.object
+
+    def get_context_data(self, **kwargs):
+        context = super(CookieDetailView, self).get_context_data(**kwargs)
+        context['has_voted'] = Vote.objects.has_voted(self.request.user.id, self.object)
+        return context
 
 detail = CookieDetailView.as_view()
 

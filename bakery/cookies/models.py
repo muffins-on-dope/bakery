@@ -54,6 +54,7 @@ class Cookie(models.Model):
     objects = CookieManager()
 
     class Meta:
+        ordering = ['-last_change', 'name']
         unique_together = ('name', 'owner_name')
         verbose_name = _('Cookie')
         verbose_name_plural = _('Cookies')

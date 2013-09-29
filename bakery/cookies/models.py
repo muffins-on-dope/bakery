@@ -24,6 +24,13 @@ class Cookie(models.Model):
     backend = models.CharField(_('Backend'), max_length=25)
     mapping = JSONField(default={})
 
+    # Hosting Statistics
+    repo_watchers = models.IntegerField(_("repo watchers"), default=0)
+    repo_forks = models.IntegerField(_("repo forks"), default=0)
+    participants = models.TextField(_("Participants"),
+        help_text="List of collaborats/participants on the project", blank=True)
+    language = models.CharField(_('Language'), max_length=50, default='')
+
     objects = CookieManager()
 
     class Meta:

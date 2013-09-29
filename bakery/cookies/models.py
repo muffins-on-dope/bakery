@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from jsonfield import JSONField
 
+from bakery.auth.models import BakeryUser
 from bakery.cookies.managers import CookieManager
 from bakery.utils.vcs.gh import (fork_repository, get_cookie_data_from_repo,
                                  get_repo_from_full_name)
@@ -42,6 +43,10 @@ class Cookie(models.Model):
     language = models.CharField(_('Language'), max_length=50, null=True)
     homepage = models.CharField(_('Homepage'), max_length=255, null=True)
     clone_urls = JSONField(default={})
+
+    # Social aspect, such as votes etc
+    votes = models.ManyToManyField(BakeryUser, through='socialize.Vote',
+        related_name='votes')
 
     objects = CookieManager()
 

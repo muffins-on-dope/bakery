@@ -45,7 +45,18 @@ class CookieManager(ExtendedManager):
         return self.import_from_cookie_dict(cookie_data, owner_data, repo)
 
     def import_from_cookie_dict(self, cookie_dict, owner_dict, repo=None):
-        owner, created = BakeryUser.objects.get_or_create(**owner_dict)
+        username = owner_dict['username']
+        email = owner_dict.get('email', None)
+
+        if email is not None and not email.endswith('localhost.invalid'):
+            filter_args = {'username': username, 'email': email}
+        else:
+            filter_args = {'username': username}
+
+        filter_args['defaults'] = owner_dict
+
+        owner, created = BakeryUser.objects.get_or_create(**filter_args)
+
         if created:
             owner.set_unusable_password()
             owner.save(update_fields=['password'])

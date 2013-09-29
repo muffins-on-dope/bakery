@@ -4,6 +4,8 @@ from django.test import TestCase
 from django.utils.encoding import smart_str
 from bakery.auth.models import BakeryUser
 from bakery.cookies.models import Cookie
+from bakery.utils.test import read
+import httpretty
 
 
 class TestApi(TestCase):
@@ -34,3 +36,19 @@ class TestApi(TestCase):
                 "last_change": None
             }]
         )
+
+    @httpretty.activate
+    def test_cookies_list(self):
+        httpretty.register_uri(httpretty.GET,
+            'https://api.github.com/repos/muffins-on-dope/bakery',
+            body=read(__file__, '..', '_replay_data', 'bakery-repository'),
+            content_type='application/json; charset=utf-8'
+        )
+
+
+        self.client.post('/api/v1/cookies/new/',
+            json.dumps({'url': 'git@github.com:muffins-on-dope/bakery.git'}),
+            content_type='application/json',
+        )
+
+        self.assertEqual(Cookie.objects.count(), 1)

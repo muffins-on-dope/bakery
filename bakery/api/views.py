@@ -6,6 +6,8 @@ from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import Q
 from django.http import HttpResponse
+from django.views.decorators.http import require_POST
+from django.utils.encoding import smart_str
 
 
 from bakery.cookies.models import Cookie
@@ -41,3 +43,11 @@ def cookies_search(request, term):
     q = Q(name__icontains=term) | Q(description__icontains=term)
     cookies = list(Cookie.objects.filter(q).values('name', 'url', 'description', 'last_change').all())
     return JSONResponse(cookies)
+
+
+@require_POST
+def cookies_new(request):
+    data = json.loads(smart_str(request.body))
+    url = data.get('url')
+    cookie = Cookie.objects.import_from_url(url)
+    return JSONResponse({'imported': 'success', 'object': cookie})

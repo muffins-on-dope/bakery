@@ -18,7 +18,6 @@ class HomeView(ListView):
             queryset = queryset.filter(q)
         return queryset
 
-
 home = HomeView.as_view()
 
 

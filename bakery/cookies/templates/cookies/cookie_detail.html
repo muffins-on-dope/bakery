@@ -3,9 +3,12 @@
 {% block content %}
 <div class="cookie-detail">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 breadcrumb">
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 breadcrumb">
             <span><a href="#">{{ object.owner_name}}</a></span><!-- TODO: Fix link -->
             <span class="active">{{ object.name }}</span>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 url">
+            <a href="{{ object.url }}">View on {{ object.backend }}</a>
         </div>
     </div>
     <div class="row">

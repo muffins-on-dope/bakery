@@ -7,7 +7,7 @@ from bakery.auth.models import BakeryUser
 from bakery.utils.vcs import gh
 
 
-class ExtendedQuerySet(QuerySet):
+class CookieQuerySet(QuerySet):
 
     def update_or_create(self, *args, **kwargs):
         obj, created = self.get_or_create(*args, **kwargs)
@@ -22,16 +22,14 @@ class ExtendedQuerySet(QuerySet):
         return obj
 
 
-class ExtendedManager(Manager):
+class CookieManager(Manager):
+    use_for_related_fields = True
+
     def get_query_set(self):
-        return ExtendedQuerySet(self.model)
+        return CookieQuerySet(self.model)
 
     def update_or_create(self, *args, **kwargs):
         return self.get_query_set().update_or_create(**kwargs)
-
-
-class CookieManager(ExtendedManager):
-    use_for_related_fields = True
 
     def import_from_url(self, url):
         """Imports or updates from ``url``"""

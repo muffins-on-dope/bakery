@@ -5,6 +5,7 @@ from django.views.generic import ListView, TemplateView, RedirectView
 from django.contrib import auth
 
 from bakery.cookies.models import Cookie
+from bakery.socialize.models import Vote
 
 
 class HomeView(ListView):
@@ -13,7 +14,8 @@ class HomeView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
-        voted_cookie_ids = self.request.user.votes.values_list('pk', flat=True).all()
+        user_votes = Vote.objects.get_for_user(self.request.user.id)
+        voted_cookie_ids = user_votes.values_list('pk', flat=True).all()
         context['voted_cookie_ids'] = list(voted_cookie_ids)
         return context
 

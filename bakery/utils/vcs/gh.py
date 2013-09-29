@@ -110,9 +110,9 @@ def get_cookie_data_from_repo(repo):
       on the repository
     * ``mapping`` -- The content of the ``cookiecutter.json`` file (or similar)
     * ``backend`` -- ``github``
-    * ``repo_watchers`` -- 
-    * ``repo_forks`` -- 
-    * ``participants`` -- 
+    * ``repo_watchers`` -- Amount of repository watchers
+    * ``repo_forks`` -- About of repository forks
+    * ``participants`` -- List of participant usernames
     * ``language`` -- The main language used in the repository
     * ``homepage`` -- The repository homepage
     * ``clone_urls`` -- A Dict of urls one can use to clone the repository

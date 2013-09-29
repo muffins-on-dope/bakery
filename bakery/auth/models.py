@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser
 
 from bakery.auth.managers import BakeryUserManager
+from bakery.socialize.models import Vote
 
 
 class BakeryUser(AbstractBaseUser):
@@ -41,3 +42,7 @@ class BakeryUser(AbstractBaseUser):
     def get_short_name(self):
         "Returns the short name for the user."
         return self.name
+
+    def vote_for_cookie(self, cookie):
+        if not Vote.objects.has_voted(self, cookie):
+            Vote.objects.create(user=self, cookie=cookie)

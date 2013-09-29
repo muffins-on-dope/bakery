@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     'bakery.auth',
     'bakery.cookies',
     'bakery.socialize',
+    'bakery.profiles',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

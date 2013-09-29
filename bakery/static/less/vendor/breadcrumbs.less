@@ -12,13 +12,13 @@
   > li {
     display: inline-block;
     font-size: 2em;
+    a {
+      color: @breadcrumb-color;
+    }
     &+li:before {
       content: "/\00a0"; // Unicode space added since inline-block means non-collapsing white-space
       padding: 0 5px;
-      &,
-      a {
-        color: @breadcrumb-color;
-      }
+      color: @breadcrumb-color;
     }
   }
   > .active {

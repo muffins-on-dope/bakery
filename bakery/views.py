@@ -16,7 +16,7 @@ class HomeView(ListView):
         context = super(HomeView, self).get_context_data(**kwargs)
         user_votes = Vote.objects.get_for_user(self.request.user.id)
         voted_cookie_ids = user_votes.values_list('pk', flat=True).all()
-        context['voted_cookie_ids'] = list(voted_cookie_ids)
+        context['voted_cookie_ids'] = voted_cookie_ids
         return context
 
 home = HomeView.as_view()

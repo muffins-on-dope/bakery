@@ -63,7 +63,15 @@
         <hr><small>{{ object.homepage }}</small>
         <br><br>
       {% endif %}
+      {% if object.language %}
+        <strong>{% trans "Participants" %}</strong>
+        <hr><small>{{ object.participants }}</small>
+        <br><br>
+      {% endif %}
     </div>
+    <div class="col-md-10">
+      <pre>{{ object.mapping_pretty }}</pre>
+    <div>
   </div>
 </div>
 {% endblock content %}

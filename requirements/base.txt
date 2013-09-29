@@ -3,7 +3,7 @@ PyGithub==1.19.0
 South==0.8.2
 jsonfield==0.9.19
 oauthlib==0.6.0
--e git+https://github.com/muffins-on-dope/python-social-auth.git@c4ed46fa0c222525e5cff6ae2f6d4dcc15109063#egg=python-social-auth
+-e git+https://github.com/muffins-on-dope/python-social-auth.git@2afa422#egg=python-social-auth
 python3-openid==3.0.1
 pytz==2013d
 requests==2.0.0

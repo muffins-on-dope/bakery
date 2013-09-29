@@ -39,9 +39,9 @@ class Cookie(models.Model):
     repo_watchers = models.IntegerField(_("repo watchers"), default=0)
     repo_forks = models.IntegerField(_("repo forks"), default=0)
     participants = models.TextField(_("Participants"),
-        help_text="List of collaborats/participants on the project", blank=True)
-    language = models.CharField(_('Language'), max_length=50, blank=True)
-    homepage = models.CharField(_('Homepage'), max_length=255, blank=True)
+        help_text="List of collaborats/participants on the project", null=True)
+    language = models.CharField(_('Language'), max_length=50, null=True)
+    homepage = models.CharField(_('Homepage'), max_length=255, null=True)
     clone_urls = JSONField(default={})
 
     objects = CookieManager()
@@ -82,7 +82,7 @@ class Cookie(models.Model):
         fork = fork_repository(user, self.repository)
         cookie_dict = get_cookie_data_from_repo(fork)
         owner_dict = cookie_dict.pop('_owner', None)
-        Cookie.objects.insert_from_cookie_dict(
+        Cookie.objects.import_from_cookie_dict(
             cookie_dict,
             owner_dict,
             self.repository

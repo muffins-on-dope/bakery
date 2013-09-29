@@ -43,7 +43,7 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             {% if request.user.is_authenticated %}
-                            <span class="lead">Hey {{ request.user.name }}! <a href="{% url "auth:logout" %}">Logout!</a></span>
+                            <span class="lead">Hey {{ request.user.get_display_name }}! <a href="{% url "auth:logout" %}">Logout!</a></span>
                             {% else %}
                                 <li>
                                     <a class="btn btn-default color2a" id="github-login" href="{% url 'social:begin' 'github' %}"

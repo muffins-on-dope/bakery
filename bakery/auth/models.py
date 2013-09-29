@@ -44,6 +44,9 @@ class BakeryUser(AbstractBaseUser):
         "Returns the short name for the user."
         return self.name
 
+    def get_display_name(self):
+        return self.name or self.username
+
     def get_gravatar(self):
         return get_gravatar(self.email)
 

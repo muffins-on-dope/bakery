@@ -2,6 +2,7 @@
 
 import json
 import pytz
+import uuid
 import http.client
 
 from base64 import standard_b64decode
@@ -128,9 +129,15 @@ def get_cookie_data_from_repo(repo):
     content = get_content_from_content_file(mapping_file)
 
     owner = repo.owner
+
+    email = owner.email
+
+    if not email:
+        email = '{0}@localhost.invalid'.format(uuid.uuid4().hex)
+
     owner_data = {
         'username': owner.login,
-        'email': owner.email,
+        'email': email,
         'name': owner.name,
         'is_organization': owner.type == "Organization",
         'profile_url': owner.html_url,

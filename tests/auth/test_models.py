@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from django.core.urlresolvers import reverse
+from django.test import TestCase
 from django.utils import unittest
-from django.utils.unittest import TestCase
 
 from bakery.auth.models import BakeryUser
 
 
 class TestBakeryUserModel(TestCase):
-
-    def tearDown(self):
-        BakeryUser.objects.all().delete()
 
     @unittest.skip('Not yet implemented')
     def test_get_absolute_url(self):

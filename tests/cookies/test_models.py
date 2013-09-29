@@ -3,7 +3,7 @@
 import httpretty
 
 from django.utils.timezone import now
-from django.utils.unittest import TestCase
+from django.test import TestCase
 
 from bakery.auth.models import BakeryUser
 from bakery.cookies.models import Cookie
@@ -11,10 +11,6 @@ from bakery.utils.test import read
 
 
 class TestCookieModel(TestCase):
-
-    def tearDown(self):
-        BakeryUser.objects.all().delete()
-        Cookie.objects.all().delete()
 
     def test_owner_on_delete(self):
         """

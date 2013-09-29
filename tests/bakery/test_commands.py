@@ -14,15 +14,10 @@ from bakery.utils.test import read
 
 class TestCommands(TestCase):
 
-    def tearDown(self):
-        BakeryUser.objects.all().delete()
-        Cookie.objects.all().delete()
-
     def test_createsuperuser(self):
         out = StringIO()
         management.call_command('createsuperuser', 'SocialUser', stdout=out)
         self.assertIn('Created SocialUser', out.getvalue())
-
 
     def test_createsuperuser_duplicat(self):
         out = StringIO()

@@ -5,7 +5,8 @@ import os
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+
 
 DATABASES = {
     'default': {
@@ -45,27 +46,27 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+# Absolute path to the directory that holds media.
+# Example: "/home/media/media.lawrence.com/"
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, "media")
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
+# trailing slash if there is a path component (optional in other cases).
+# Examples: "http://media.lawrence.com", "http://example.com/media/"
+MEDIA_URL = "/media/"
 
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+# Absolute path to the directory that holds static files like app media.
+# Example: "/home/media/media.lawrence.com/apps/"
+STATIC_ROOT = os.path.join(PROJECT_ROOT, "collected_static")
 
-# URL prefix for static files.
-# Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+# URL that handles the static files like app media.
+# Example: "http://media.lawrence.com"
+STATIC_URL = "/static/"
 
-# Additional locations of static files
-STATICFILES_DIRS = ()
+# Additional directories which hold static files
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_ROOT, "static"),
+]
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -113,6 +114,7 @@ WSGI_APPLICATION = 'bakery.wsgi.application'
 TEMPLATE_DIRS = ()
 
 INSTALLED_APPS = (
+    'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',

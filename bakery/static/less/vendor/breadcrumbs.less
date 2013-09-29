@@ -11,13 +11,18 @@
   border-radius: @border-radius-base;
   > li {
     display: inline-block;
+    font-size: 2em;
     &+li:before {
       content: "/\00a0"; // Unicode space added since inline-block means non-collapsing white-space
       padding: 0 5px;
-      color: @breadcrumb-color;
+      &,
+      a {
+        color: @breadcrumb-color;
+      }
     }
   }
   > .active {
     color: @breadcrumb-active-color;
+    font-size: 3em;
   }
 }

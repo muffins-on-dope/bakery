@@ -68,7 +68,7 @@ class Cookie(models.Model):
     def activity(self):
         if self.last_change >= (datetime.utcnow() - timedelta(days=365)):
             return ACTIVITY['ancient']
-        elif self.last_change >= (datetime.utcnow() - timedelta(days=30)):
+        elif self.last_change >= (datetime.utcnow() - timedelta(days=10)):
             return ACTIVITY['moderate']
         else:
             return ACTIVITY['active']

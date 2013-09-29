@@ -8,21 +8,22 @@ from django.test import TestCase
 from django.utils.six import StringIO
 
 from bakery.auth.models import BakeryUser
-from bakery.cookies.models import Cookie
 from bakery.utils.test import read
 
 
 class TestCommands(TestCase):
 
-    def test_createsuperuser(self):
+    def test_makesuperuser(self):
+        BakeryUser.objects.create_user('SocialUser')
+        user = BakeryUser.objects.get(username='SocialUser')
+        self.assertFalse(user.is_staff)
+        self.assertFalse(user.is_superuser)
         out = StringIO()
-        management.call_command('createsuperuser', 'SocialUser', stdout=out)
-        self.assertIn('Created SocialUser', out.getvalue())
-
-    def test_createsuperuser_duplicat(self):
-        out = StringIO()
-        management.call_command('createsuperuser', 'SocialUser', stdout=out)
-        self.assertRaises(CommandError, management.call_command, ('SocialUser',))
+        management.call_command('makesuperuser', 'SocialUser', stdout=out)
+        self.assertIn('Updated SocialUser to superuser status', out.getvalue())
+        user = BakeryUser.objects.get(username='SocialUser')
+        self.assertTrue(user.is_staff)
+        self.assertTrue(user.is_superuser)
 
     @httpretty.activate
     def test_importcookie(self):

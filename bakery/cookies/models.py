@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+import json
 import re
 
 from datetime import datetime, timedelta
@@ -104,3 +106,12 @@ class Cookie(models.Model):
             repository = get_repo_from_full_name(self.full_name)
             setattr(self, '_repository', repository)
         return repository
+
+    @property
+    def mapping_pretty(self):
+        mapping_pretty = getattr(self, '_mapping_pretty', None)
+        if not mapping_pretty:
+            mapping_pretty = json.dumps(self.mapping, ensure_ascii=False,
+                                        indent=4, sort_keys=True)
+            setattr(self, '_mapping_pretty', mapping_pretty)
+        return mapping_pretty

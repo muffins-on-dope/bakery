@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
+import urllib
 from datetime import datetime, timedelta
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -58,6 +59,10 @@ class Cookie(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        # TODO
+        return ''
+
     @property
     def full_name(self):
         return "{0}/{1}".format(self.owner_name, self.name)
@@ -68,6 +73,10 @@ class Cookie(models.Model):
         if descr is None:
             descr = self.description
         return _punctuation.split(descr)[0]
+
+    @property
+    def repo_title(self):
+        return urllib.parse.urlsplit(self.url).path.lstrip('/')
 
     @property
     def activity(self):

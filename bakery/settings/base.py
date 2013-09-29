@@ -101,7 +101,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
-    'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'social.apps.django_app.context_processors.backends',
 )
@@ -126,7 +125,6 @@ INSTALLED_APPS = (
     'bakery.auth',
     'bakery.cookies',
     'bakery.socialize',
-    'bakery.profiles',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

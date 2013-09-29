@@ -43,13 +43,28 @@ class TestApi(TestCase):
     @httpretty.activate
     def test_cookie_register(self):
         httpretty.register_uri(httpretty.GET,
-            'https://api.github.com/repos/muffins-on-dope/bakery',
-            body=read(__file__, '..', '_replay_data', 'bakery-repository'),
+            'https://api.github.com/repos/audreyr/cookiecutter-pypackage',
+            body=read(__file__, '..', '_replay_data', 'cookiecutter-pypacker-repository'),
+            content_type='application/json; charset=utf-8'
+        )
+        httpretty.register_uri(httpretty.GET,
+            'https://api.github.com/users/audreyr',
+            body=read(__file__, '..', '_replay_data', 'audreyr'),
+            content_type='application/json; charset=utf-8'
+        )
+        httpretty.register_uri(httpretty.GET,
+            'https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/',
+            body=read(__file__, '..', '_replay_data', 'cookiecutter-pypacker-rootdir'),
+            content_type='application/json; charset=utf-8'
+        )
+        httpretty.register_uri(httpretty.GET,
+            'https://api.github.com/repos/audreyr/cookiecutter-pypackage/contents/cookiecutter.json',
+            body=read(__file__, '..', '_replay_data', 'cookiecutter-pypacker-cookiecutter.json'),
             content_type='application/json; charset=utf-8'
         )
 
         self.client.post('/api/v1/cookies/new/',
-            json.dumps({'url': 'git@github.com:muffins-on-dope/bakery.git'}),
+            json.dumps({'url': 'git@github.com/audreyr/cookiecutter-pypackage.git'}),
             content_type='application/json',
         )
 

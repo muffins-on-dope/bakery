@@ -18,6 +18,13 @@
             <span class="badge color2b">very active</span>
             {% endif %}
         </td>
+        <td>
+            <form action="{% url 'socialize:vote' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="c" value="{{ cookie.id }}">
+                <input type="submit" value="&#x1f36a;" title="Vote">
+            </form>
+        </td>
     </tr>
     {% endfor %}
 </table>

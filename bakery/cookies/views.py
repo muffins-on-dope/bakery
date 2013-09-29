@@ -3,10 +3,11 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.http import Http404, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.http import require_POST
+from django.views.generic import DetailView
 
 from github import Github, GithubException
 
@@ -14,8 +15,15 @@ from bakery.cookies.models import Cookie
 from bakery.utils.vcs.gh import fork_repository
 
 
-def detail(request, owner_name, name):
-    raise Http404('{0}/{1}'.format(owner_name, name))
+class CookieDetailView(DetailView):
+    model = Cookie
+
+    def get_object(self):
+        owner_name = self.kwargs['owner_name']
+        name = self.kwargs['name']
+        return get_object_or_404(Cookie, owner_name=owner_name, name=name)
+
+detail = CookieDetailView.as_view()
 
 
 @login_required

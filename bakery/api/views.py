@@ -3,7 +3,7 @@
 import json
 
 from django.conf import settings
-from django.core.serializers.json import DjangoJSONEncoder
+from django.core.serializers.json import DjangoJSONEncoder, Serializer
 from django.db.models import Q
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
@@ -50,4 +50,5 @@ def cookies_new(request):
     data = json.loads(smart_str(request.body))
     url = data.get('url')
     cookie = Cookie.objects.import_from_url(url)
-    return JSONResponse({'imported': 'success', 'object': cookie})
+    obj = json.loads(Serializer().serialize([cookie]))
+    return JSONResponse({'imported': 'success', 'object': obj})

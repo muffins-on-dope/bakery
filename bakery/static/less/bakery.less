@@ -34,16 +34,27 @@ html, body {
 
 .page-header {
     border: none;
-    h2 {
-        display: inline-block;
+    @media (max-width: @screen-desktop) {
+        h2.long {
+            display: none;
+        }
+        h2.short {
+            display: inline-block;
+        }
     }
+    @media (min-width: @screen-desktop) {
+        h2.long {
+            display: inline-block;
+        }
+        h2.short {
+            display: none;
+        }
+    }
+
 }
 
 
 .cookies {
-    .row:not(:last-child) {
-        margin-bottom: 1em;
-    }
     .name {
         font-weight: bold;
     }

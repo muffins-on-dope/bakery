@@ -25,7 +25,7 @@ Installation
 
 .. code-block:: bash
 
-    $ Create your virtualenv (recommended, use virtualenvwrapper)
+    $ # Create your virtualenv (recommended, use virtualenvwrapper)
     $ virtualenv env
 
     $ # Clone repository
@@ -37,6 +37,21 @@ Installation
 
     $ # run tests
     $ python manage.py test
+
+
+Setup PostgreSQL
+----------------
+
+.. note::
+
+    bakery was only tested on postgresql and relies somehow on it's
+    NULL != NULL handling.
+
+
+.. code-block:: bash
+
+    $ Create your postgresql database
+    $ createdb -U postgres bakery
 
 
 Edit settings

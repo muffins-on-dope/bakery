@@ -17,8 +17,6 @@ class Command(BaseCommand):
         try:
             BakeryUser.objects.create_user(
                 username=username,
-                email=None,
-                password=None
             )
             self.stdout.write('Created {0}'.format(username))
         except ValueError as exc:

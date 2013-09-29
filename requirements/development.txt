@@ -1,5 +1,4 @@
 -r base.txt
 
-Fabric==1.8.0
-paramiko==1.11.1
-pycrypto==2.6
+django-discover-runner==1.0
+httpretty==0.6.4

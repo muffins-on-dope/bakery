@@ -29,14 +29,15 @@ Installation
     $ virtualenv env
 
     $ # Clone repository
-    $ git clone git@github.com:muffins-on-dope/bakery.git
+    $ git clone https://github.com/muffins-on-dope/bakery.git
 
     $ # Activate Environment and install
     $ source env/bin/activate
+    $ cd bakery
     $ pip install -r requirements/development.txt
 
     $ # run tests
-    $ python manage.py test
+    $ python manage.py test --settings=bakery.settings.test
 
 
 Setup PostgreSQL
@@ -44,8 +45,7 @@ Setup PostgreSQL
 
 .. note::
 
-    bakery was only tested on postgresql and relies somehow on it's
-    NULL != NULL handling.
+    bakery was only tested on postgresql and probably relies on it.
 
 
 .. code-block:: bash
@@ -76,13 +76,11 @@ Setup the database
     $ python manage.py syncdb --migrate --noinput
 
 
-Superuser & example data
-------------------------
+Example data
+------------
 
 .. code-block:: bash
 
-    $ # Create a new super user
-    $ python manage.py createsuperuser
     $ python import.py
 
 Now you can run the webserver and start using the site.

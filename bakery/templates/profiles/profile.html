@@ -25,14 +25,29 @@
       <strong>Stats</strong>
       <hr />
       <table>
-          <tbody>
-              <tr>
-                  <td><small>Cookies</small>
-                  </td>
-                  <td><span class="badge">{{ bakery_user.cookie_set.count }}</span>
-                  </td>
-              </tr>
-          </tbody>
+        <tbody>
+          <tr>
+            <td><small>Cookies</small>
+            </td>
+            <td><span class="badge">{{ bakery_user.cookie_set.count }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br><br>
+      <strong>{% trans "Candies" %}</strong>
+      <hr />
+      <table>
+        <tbody>
+          {% for candy in bakery_user.candies_list %}
+            <tr>
+              <td><small>{{ candy.0.2|safe }} {{ candy.0.1 }}</small>
+              </td>
+              <td><span class="badge">{{ candy.1 }}</span>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
       </table>
     </div>
     <div class="col-md-10">

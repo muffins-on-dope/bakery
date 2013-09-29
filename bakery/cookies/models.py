@@ -28,13 +28,13 @@ class Cookie(models.Model):
     owner = models.ForeignKey(get_user_model(), verbose_name=_('User'),
                               on_delete=models.CASCADE)
     description = models.TextField(_('Description'), blank=True)
-    license = models.CharField(_('License'), max_length=50, blank=True)
     last_change = models.DateTimeField(_('Last change'), null=True)
     last_poll = models.DateTimeField(_('Last poll'), null=True)
     backend = models.CharField(_('Backend'), max_length=25)
     mapping = JSONField(default={})
 
     # Hosting Statistics
+    license = models.CharField(_('License'), max_length=50, blank=True)
     repo_watchers = models.IntegerField(_("repo watchers"), default=0)
     repo_forks = models.IntegerField(_("repo forks"), default=0)
     participants = models.TextField(_("Participants"),

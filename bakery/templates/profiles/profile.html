@@ -4,7 +4,7 @@
 {% load i18n %}
 
 {% block head_title %}
-{% blocktrans username=bakery_user.username %}
+{% blocktrans with username=bakery_user.username %}
   Profile for {{ username}}
 {% endblocktrans %}
 {% endblock head_title%}

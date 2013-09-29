@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
+{% block head_title %}Cookie {{ object.full_name }}{% endblock %}
+
 {% block content %}
-<div class="cookie-detail">
+<div class="container">
     <div class="row">
-        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 breadcrumb">
-            <span><a href="{{ object.owner.get_absolute_url }}">{{ object.owner_name }}</a></span><!-- TODO: Fix link -->
-            <span class="active">{{ object.name }}</span>
+        <div class="col-md-10 breadcrumb">
+            <h3><a href="{{ object.owner.get_absolute_url }}">{{ object.owner_name }}</a></h3><!-- TODO: Fix link -->
+            <h1>{{ object.name }}</h2>
         </div>
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right url">
             <a href="{{ object.url }}">View on {{ object.backend }}</a>

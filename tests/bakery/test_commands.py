@@ -25,6 +25,13 @@ class TestCommands(TestCase):
         self.assertTrue(user.is_staff)
         self.assertTrue(user.is_superuser)
 
+    def test_makesuperuser_not_found(self):
+        BakeryUser.objects.create_user('SocialUser')
+        user = BakeryUser.objects.get(username='SocialUser')
+        self.assertFalse(user.is_staff)
+        self.assertFalse(user.is_superuser)
+        self.assertRaises(CommandError, management.call_command, ('makesuperuser',), 'SocialUser2')
+
     @httpretty.activate
     def test_importcookie(self):
         httpretty.register_uri(httpretty.GET,

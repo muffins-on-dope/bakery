@@ -104,6 +104,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',
     'social.apps.django_app.context_processors.backends',
+    'bakery.socialize.context_processors.votes.voted_cookies'
 )
 
 ROOT_URLCONF = 'bakery.urls'

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+import re
+from datetime import datetime, timedelta
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -9,6 +10,16 @@ from jsonfield import JSONField
 from bakery.cookies.managers import CookieManager
 from bakery.utils.vcs.gh import (fork_repository, get_cookie_data_from_repo,
                                  get_repo_from_full_name)
+
+
+
+_punctuation = re.compile(r'[!,.:;?]*')
+
+ACTIVITY = {
+    'ancient': 0,
+    'moderate': 1,
+    'active': 2
+}
 
 
 class Cookie(models.Model):
@@ -47,6 +58,19 @@ class Cookie(models.Model):
     def full_name(self):
         return "{0}/{1}".format(self.owner_name, self.name)
 
+    @property
+    def short_description(self):
+        return _punctuation.split(self.description)[0]
+
+    @property
+    def activity(self):
+        if self.last_change >= (datetime.utcnow() - timedelta(days=365)):
+            return ACTIVITY['ancient']
+        elif self.last_change >= (datetime.utcnow() - timedelta(days=30)):
+            return ACTIVITY['moderate']
+        else:
+            return ACTIVITY['active']
+
     def fork(self, user):
         """
         :raises: ``UnknownObjectException`` is raised if the repository cannot
@@ -55,7 +79,11 @@ class Cookie(models.Model):
         fork = fork_repository(user, self.repository)
         cookie_dict = get_cookie_data_from_repo(fork)
         owner_dict = cookie_dict.pop('_owner', None)
-        Cookie.objects.insert_from_cookie_dict(cookie_dict, owner_dict, self.repository)
+        Cookie.objects.insert_from_cookie_dict(
+            cookie_dict,
+            owner_dict,
+            self.repository
+        )
 
     @property
     def repository(self):

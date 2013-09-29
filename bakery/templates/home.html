@@ -2,14 +2,21 @@
 
 {% block content %}
 <h4>Cookies</h4>
-<ul class="list-group color1">
+<table class="table table-condensed cookies color1">
     {% for cookie in cookies %}
-    <li class="list-group-item">
-        {{ cookie.name }}
-        <span class="badge color1">
-            {{ cookie.last_change|date }}
-        </span>
-    </li>
+    <tr class="cookie">
+        <td class="name">{{ cookie.name }}</td>
+        <td class="description">{{ cookie.short_description }}</td>
+        <td class="badges">
+            {% if cookie.activity == 0 %}
+            <span class="badge color1a">ancient</span>
+            {% elif cookie.activity == 1 %}
+            <span class="badge color1c">active</span>
+            {% else %}
+            <span class="badge color2b">very active</span>
+            {% endif %}
+        </td>
+    </tr>
     {% endfor %}
-</ul>
+</table>
 {% endblock content %}

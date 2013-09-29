@@ -147,6 +147,20 @@ def get_cookie_data_from_repo(repo):
     return data
 
 
+def filter_repo(repo, filters):
+    contents = repo.get_contents('/')
+    if contents:
+        candidates = {}
+        for rd in contents.raw_data:
+            if rd['type'] != 'file':
+                continue
+            for key, filter in filters.items():
+                if filter(rd[key]):
+                    candidates[rd['name']] = rd
+
+    return candidates
+
+
 def get_mapping_file_from_repo(repo):
     """
     Finds a ``cookiecutter.json`` or another JSON file in the repository root
@@ -167,26 +181,19 @@ def get_mapping_file_from_repo(repo):
     :raises: ``InvalidRepositoryError`` if there was no way to
         deterministically find the mapping file.
     """
-    contents = repo.get_contents('/')
-    if contents:
-        candidates = {}
-        for rd in contents.raw_data:
-            if rd['type'] != 'file':
-                continue
-            if rd['name'].endswith('.json'):
-                candidates[rd['name']] = rd
+    candidates = filter_repo(repo, {'name': lambda val: val.endswith('.json')})
 
-        if not candidates:
-            raise InvalidRepositoryError('No JSON mapping file found!')
-        if len(candidates) > 1:
-            mapping_file = candidates.get('cookiecutter.json', None)
-            if mapping_file is None:
-                raise InvalidRepositoryError('Cannot decide for a mapping file! '
-                                             'Multiple files found: {0}'.format(', '.join(candidates.keys)))
-        else:
-            mapping_file = list(candidates.values())[0]
-        return repo.get_contents('/' + mapping_file['name'])
-    raise InvalidRepositoryError('The repository does not have any content!')
+    if not candidates:
+        raise InvalidRepositoryError('No JSON mapping file found!')
+
+    if len(candidates) > 1:
+        mapping_file = candidates.get('cookiecutter.json', None)
+        if mapping_file is None:
+            raise InvalidRepositoryError('Cannot decide for a mapping file! '
+                                         'Multiple files found: {0}'.format(', '.join(candidates.keys)))
+    else:
+        mapping_file = list(candidates.values())[0]
+    return repo.get_contents('/' + mapping_file['name'])
 
 
 def get_content_from_content_file(content_file):

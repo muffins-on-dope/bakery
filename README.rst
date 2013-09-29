@@ -76,13 +76,11 @@ Setup the database
     $ python manage.py syncdb --migrate --noinput
 
 
-Superuser & example data
-------------------------
+Example data
+------------
 
 .. code-block:: bash
 
-    $ # Create a new super user
-    $ python manage.py makesuperuser
     $ python import.py
 
 Now you can run the webserver and start using the site.

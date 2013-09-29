@@ -45,8 +45,7 @@ Setup PostgreSQL
 
 .. note::
 
-    bakery was only tested on postgresql and relies somehow on it's
-    NULL != NULL handling.
+    bakery was only tested on postgresql and probably relies on it.
 
 
 .. code-block:: bash
@@ -83,7 +82,7 @@ Superuser & example data
 .. code-block:: bash
 
     $ # Create a new super user
-    $ python manage.py createsuperuser
+    $ python manage.py makesuperuser
     $ python import.py
 
 Now you can run the webserver and start using the site.

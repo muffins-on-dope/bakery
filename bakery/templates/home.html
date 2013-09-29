@@ -18,13 +18,23 @@
             <span class="badge color2b">very active</span>
             {% endif %}
         </td>
-        <td>
-            <form action="{% url 'socialize:vote' %}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="c" value="{{ cookie.id }}">
-                <input type="submit" value="&#x1f36a;" title="Vote">
-            </form>
-        </td>
+        {% if request.user.is_authenticated %}
+            <td>
+                {% if cookie.pk in voted_cookie_ids %}
+                    <form action="{% url 'socialize:unvote' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="c" value="{{ cookie.id }}">
+                        <input type="submit" value="&#x1f36a;" title="Vote" class="btn btn-xs btn-primary">
+                    </form>
+                {% else %}
+                    <form action="{% url 'socialize:vote' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="c" value="{{ cookie.id }}">
+                        <input type="submit" value="&#x1f36a;" title="Vote" class="btn btn-xs btn-default">
+                    </form>
+                {% endif %}
+            </td>
+        {% endif %}
     </tr>
     {% endfor %}
 </table>

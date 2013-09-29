@@ -11,6 +11,12 @@ class HomeView(ListView):
     model = Cookie
     template_name = 'home.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        voted_cookie_ids = self.request.user.votes.values_list('pk', flat=True).all()
+        context['voted_cookie_ids'] = list(voted_cookie_ids)
+        return context
+
 home = HomeView.as_view()
 
 

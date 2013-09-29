@@ -196,12 +196,11 @@ def get_mapping_file_from_repo(repo):
     return repo.get_contents('/' + mapping_file['name'])
 
 
-def get_content_from_content_file(content_file):
+def decode_file(content_file):
     """
-    Given a ``PyGithub.ContentFile`` this function will decode the file's data
-    decodes its JSON content.
+    Given a ``PyGithub.ContentFile`` this function will decode the file's data.
 
-    :return dict: Returns a ``dict`` with the JSON content
+    :return dict: Returns a raw decoded string.
     :raises: ``InvalidContentFileEncoding`` raised if not suitable decoding
         is defined.
     """
@@ -211,8 +210,19 @@ def get_content_from_content_file(content_file):
     if decoded is None:
         raise InvalidContentFileEncoding(
             'Encoding {0} cannot be decoded'.format(content_file.encoding))
-    mapping_data = json.loads(decoded)
-    return mapping_data
+    return decoded
+
+
+def get_content_from_content_file(content_file):
+    """
+    Given a ``PyGithub.ContentFile`` this function will decode the file's data
+    and loads it's JSON content.
+
+    :return dict: Returns a ``dict`` with the JSON content
+    :raises: ``InvalidContentFileEncoding`` raised if not suitable decoding
+        is defined.
+    """
+    return decode_file(json.loads(decoded))
 
 
 def fork_repository(user, repo):

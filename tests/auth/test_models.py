@@ -1,19 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from django.core.urlresolvers import reverse
 from django.test import TestCase
-from django.utils import unittest
 
 from bakery.auth.models import BakeryUser
 
 
 class TestBakeryUserModel(TestCase):
 
-    @unittest.skip('Not yet implemented')
     def test_get_absolute_url(self):
         user = BakeryUser.objects.create_user('user', 'password')
         user.name = 'John Doe'
-        self.assertEqual(user.get_absolute_url(), reverse('user-detail-view'))
+        self.assertEqual(user.get_absolute_url(), '/profile/user/')
 
     def test_get_full_name(self):
         user = BakeryUser.objects.create_user('user', 'password')

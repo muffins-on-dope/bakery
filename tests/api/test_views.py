@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
+
+import httpretty
 import json
+
 from django.test import TestCase
 from django.utils.encoding import smart_str
 from bakery.auth.models import BakeryUser
+
 from bakery.cookies.models import Cookie
 from bakery.utils.test import read
-import httpretty
 
 
 class TestApi(TestCase):
@@ -17,7 +20,7 @@ class TestApi(TestCase):
     def test_cookies_list(self):
         BakeryUser.objects.create_user('user')
         user = BakeryUser.objects.get(username='user')
-        cookie = Cookie.objects.create(
+        Cookie.objects.create(
             name='test',
             owner_name='test',
             url='http://example.com/unique',
@@ -38,13 +41,12 @@ class TestApi(TestCase):
         )
 
     @httpretty.activate
-    def test_cookies_list(self):
+    def test_cookie_register(self):
         httpretty.register_uri(httpretty.GET,
             'https://api.github.com/repos/muffins-on-dope/bakery',
             body=read(__file__, '..', '_replay_data', 'bakery-repository'),
             content_type='application/json; charset=utf-8'
         )
-
 
         self.client.post('/api/v1/cookies/new/',
             json.dumps({'url': 'git@github.com:muffins-on-dope/bakery.git'}),

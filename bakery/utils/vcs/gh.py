@@ -103,13 +103,19 @@ def get_cookie_data_from_repo(repo):
     following information:
 
     * ``name`` -- Repository name
+    * ``owner_name`` -- The owner name of the repository
     * ``url`` -- The HTTP URL to view the repository in a browser
     * ``description`` -- A brief description about the repository
-    * ``owner_name`` -- The owner name of the repository
     * ``last_change`` -- A timezone aware timestamp of the last modification
       on the repository
     * ``mapping`` -- The content of the ``cookiecutter.json`` file (or similar)
-    * ``backend`` -- 'github'
+    * ``backend`` -- ``github``
+    * ``repo_watchers`` -- 
+    * ``repo_forks`` -- 
+    * ``participants`` -- 
+    * ``language`` -- The main language used in the repository
+    * ``homepage`` -- The repository homepage
+    * ``clone_urls`` -- A Dict of urls one can use to clone the repository
     * _``owner`` -- A dict with information about the owner of the repository
 
       * ``username`` -- The user- or login name (required)

@@ -4608,20 +4608,23 @@ textarea.input-group-sm > .input-group-btn > .btn {
   padding: 8px 15px;
   margin-bottom: 20px;
   list-style: none;
-  background-color: none;
-  border-radius: 4px;
 }
 
-.breadcrumb > li {
+.breadcrumb > li,
+.breadcrumb > span {
   display: inline-block;
   font-size: 2em;
 }
 
-.breadcrumb > li a {
+.breadcrumb > li a,
+.breadcrumb > span a {
   color: #333333;
 }
 
-.breadcrumb > li + li:before {
+.breadcrumb > li + li:before,
+.breadcrumb > span + li:before,
+.breadcrumb > li + span:before,
+.breadcrumb > span + span:before {
   padding: 0 5px;
   color: #333333;
   content: "/\00a0";

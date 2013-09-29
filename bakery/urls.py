@@ -12,6 +12,10 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'bakery.views.logout', name='logout'),
     url(r'^styles/$', 'bakery.views.styles', name='styles'),
     url(r'^login-error/$', 'bakery.views.login_error', name='login_error'),
+
+    url(r'^', include('bakery.cookies.urls', namespace='cookies')),
+    url(r'^', include('bakery.socialize.urls', namespace='socialize')),
+
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^admin/', include(admin.site.urls)),
 )

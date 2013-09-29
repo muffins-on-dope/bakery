@@ -31,7 +31,7 @@
                         <form action="{% url 'socialize:unvote' %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="c" value="{{ cookie.id }}">
-                            <input type="submit" value="&#x1f36a;" title="Vote" class="btn btn-xs btn-primary">
+                            <input type="submit" value="&#x1f36a;" title="Unvote" class="btn btn-xs btn-primary">
                         </form>
                     {% else %}
                         <form action="{% url 'socialize:vote' %}" method="POST">

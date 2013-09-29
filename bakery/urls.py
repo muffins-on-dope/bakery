@@ -15,6 +15,7 @@ urlpatterns = patterns('',
 
     url(r'^', include('bakery.cookies.urls', namespace='cookies')),
     url(r'^', include('bakery.socialize.urls', namespace='socialize')),
+    url('api/v1/', include('bakery.api.urls', namespace='api')),
 
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^admin/', include(admin.site.urls)),

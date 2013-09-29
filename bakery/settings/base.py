@@ -209,3 +209,6 @@ SOCIAL_AUTH_PIPELINE = (
 #: * client_id
 #: * client_secret
 GITHUB_CREDENTIALS = None
+
+#: The number of cookies that will show up on the API per page
+BAKERY_API_COOKIES_PER_PAGE = 50

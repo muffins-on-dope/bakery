@@ -2,7 +2,6 @@
 from django.views.generic import ListView, TemplateView
 
 from bakery.cookies.models import Cookie
-from bakery.socialize.models import Vote
 
 
 class HomeView(ListView):

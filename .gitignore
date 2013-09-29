@@ -8,7 +8,7 @@ dist
 
 media
 node_modules
-static-collected
+bakery/collected_static
 
 !.coveragerc
 !.gitignore

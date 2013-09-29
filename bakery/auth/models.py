@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
@@ -34,8 +35,7 @@ class BakeryUser(AbstractBaseUser):
         return self.username
 
     def get_absolute_url(self):
-        # TODO
-        return NotImplementedError
+        return reverse_lazy('auth:profile', kwargs={'username': self.username})
 
     def get_full_name(self):
         return self.name

@@ -2,6 +2,7 @@
 
 import json
 import pytz
+import http.client
 
 from base64 import standard_b64decode
 
@@ -134,6 +135,13 @@ def get_cookie_data_from_repo(repo):
         'is_organization': owner.type == "Organization",
         'profile_url': owner.html_url,
     }
+
+    # TODO: I think this should not fail like that :-/
+    try:
+        participants = ', '.join(user.login for user in repo.get_contributors())
+    except http.client.BadStatusLine:
+        participants = None
+
     data = {
         'name': repo.name,
         'owner_name': repo.owner.login,
@@ -144,7 +152,7 @@ def get_cookie_data_from_repo(repo):
         'backend': 'github',
         'repo_watchers': repo.watchers,
         'repo_forks': repo.forks,
-        'participants': ', '.join(user.login for user in repo.get_contributors()),
+        'participants': participants,
         'language': repo.language,
         'homepage': repo.homepage,
         'clone_urls': {

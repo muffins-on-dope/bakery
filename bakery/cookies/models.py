@@ -12,7 +12,6 @@ from bakery.utils.vcs.gh import (fork_repository, get_cookie_data_from_repo,
                                  get_repo_from_full_name)
 
 
-
 _punctuation = re.compile(r'[!,.:;?]*')
 
 ACTIVITY = {

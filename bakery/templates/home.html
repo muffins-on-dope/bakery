@@ -33,13 +33,13 @@
                         <form action="{% url 'socialize:unvote' %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="c" value="{{ cookie.id }}">
-                            <input type="submit" value="&#x1f36a;" title="Unvote" class="btn btn-xs btn-primary">
+                            <input type="submit" value="Vote" title="Unvote" class="btn btn-xs btn-primary btn-cookie">
                         </form>
                     {% else %}
                         <form action="{% url 'socialize:vote' %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="c" value="{{ cookie.id }}">
-                            <input type="submit" value="&#x1f36a;" title="Vote" class="btn btn-xs btn-default">
+                            <input type="submit" value="" title="Vote" class="btn btn-xs btn-default btn-cookie">
                         </form>
                     {% endif %}
                 {% endif %}

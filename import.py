@@ -16,6 +16,7 @@ repos = [
     'https://github.com/audreyr/cookiecutter-component',
     'https://github.com/larsyencken/pandoc-talk',
     'https://github.com/audreyr/cookiecutter-complexity',
+    'https://github.com/NigelCleland/cookiecutter-latex-journal',
 ]
 
 

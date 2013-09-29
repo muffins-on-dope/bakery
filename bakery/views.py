@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
+from django.views.generic import ListView, TemplateView
 
-from django.core.urlresolvers import reverse
-from django.views.generic import ListView, TemplateView, RedirectView
-from django.contrib import auth
-
-from bakery.auth.models import BakeryUser
 from bakery.cookies.models import Cookie
 from bakery.socialize.models import Vote
 

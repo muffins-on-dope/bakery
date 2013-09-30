@@ -42,6 +42,12 @@
                           {% block header_nav %}{% endblock header_nav %}
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a class="btn btn-default color2b" id="github-login" href="{% url 'cookies:add' %}"
+                                    title="Add your Cookie!">
+                                    Add your Cookie!
+                                </a>
+                            </li>
                             {% if request.user.is_authenticated %}
                             <span class="lead">Hey {{ request.user.get_display_name }}! <a href="{% url "auth:logout" %}">Logout!</a></span>
                             {% else %}

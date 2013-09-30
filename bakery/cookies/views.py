@@ -7,11 +7,12 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.http import require_POST
-from django.views.generic import DetailView
+from django.views.generic import DetailView, FormView
 
 from github import Github, GithubException
 
 from bakery.cookies.models import Cookie
+from bakery.cookies.forms import ImportForm
 from bakery.utils.vcs.gh import fork_repository
 
 
@@ -24,6 +25,26 @@ class CookieDetailView(DetailView):
         return get_object_or_404(Cookie, owner_name=owner_name, name=name)
 
 detail = CookieDetailView.as_view()
+
+
+class ImportView(FormView):
+    template_name = 'cookies/import.html'
+    form_class = ImportForm
+    cookie = None
+
+    def form_valid(self, form):
+        self.cookie = form.import_cookie()
+        return super(ImportView, self).form_valid(form)
+
+    def get_success_url(self):
+        if self.cookie:
+            return reverse('cookies:detail', args=(
+                self.cookie.owner_name,
+                self.cookie.name
+            ))
+        return '/'
+
+add = ImportView.as_view()
 
 
 @login_required

@@ -80,7 +80,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <strong>{% trans "Clone URLs" %}</strong>
           <hr>
           <table>
@@ -93,6 +93,32 @@
               {% endfor %}
             </tbody>
           </table>
+        </div>
+        <div class="col-md-6">
+          <strong>{% trans "Actions" %}</strong>
+          <hr>
+          {% if request.user.is_authenticated %}
+            {% if has_voted %}
+              <form action="{% url 'socialize:unvote' %}?next={{ request.get_full_path }}" method="POST" class="inline-form">
+                {% csrf_token %}
+                <input type="hidden" name="c" value="{{ cookie.id }}">
+                <input type="submit" value="Unvote" class="btn btn-primary">
+              </form>
+            {% else %}
+              <form action="{% url 'socialize:vote' %}?next={{ request.get_full_path }}" method="POST" class="inline-form">
+                {% csrf_token %}
+                <input type="hidden" name="c" value="{{ cookie.id }}">
+                <input type="submit" value="Vote" class="btn btn-default">
+              </form>
+            {% endif %}
+            <form action="{% url 'cookies:fork' object.owner_name object.name %}?next={{ request.get_full_path }}" method="POST" class="form-inline">
+              {% csrf_token %}
+              <input type="hidden" name="c" value="{{ cookie.id }}">
+              <input type="submit" value="Fork on GitHub" class="btn btn-primary">
+            </form>
+          {% else %}
+            {% trans "Please log in first" %}
+          {% endif %}
         </div>
       </div>
     </div>

@@ -41,6 +41,12 @@
                         <ul class="nav navbar-nav">
                           {% block header_nav %}{% endblock header_nav %}
                         </ul>
+                        <form class="navbar-form navbar-left" role="search" action="/" method="GET">
+                          <div class="form-group">
+                            <input name="q" type="text" class="form-control" placeholder="{% trans "Search" %}">
+                          </div>
+                          <button type="submit" class="btn btn-primary">{% trans "Search" %}</button>
+                        </form>
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a class="btn btn-default color2b" id="github-login" href="{% url 'cookies:add' %}"

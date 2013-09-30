@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% block content %}
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -33,7 +35,7 @@
                         <form action="{% url 'socialize:unvote' %}?next={{ request.get_full_path }}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="c" value="{{ cookie.id }}">
-                            <input type="submit" value="Vote" title="Unvote" class="btn btn-xs btn-primary btn-cookie">
+                            <input type="submit" value="" title="Unvote" class="btn btn-xs btn-primary btn-cookie">
                         </form>
                     {% else %}
                         <form action="{% url 'socialize:vote' %}?next={{ request.get_full_path }}" method="POST">
@@ -47,6 +49,12 @@
         </div>
     </div>
     <hr>
+{% empty %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            {% trans "No cookies found" %}
+        </div>
+    </div>
 {% endfor %}
 </div>
 {% endblock content %}

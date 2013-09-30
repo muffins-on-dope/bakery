@@ -3,7 +3,7 @@
 import json
 import re
 
-from django.core.urlresolvers import reverse_lazy, reverse
+from django.core.urlresolvers import reverse_lazy
 from datetime import datetime, timedelta
 from django.contrib.auth import get_user_model
 from django.db import models
